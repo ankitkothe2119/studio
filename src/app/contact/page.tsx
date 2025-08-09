@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,7 +19,7 @@ import { handleContactForm } from '@/lib/actions';
  * It provides a contact form, address, and other contact details.
  */
 
-const contactPageContent = {
+export const contactPageContent = {
   title: 'Contact Us',
   subtitle: 'We would love to hear from you. Get in touch with us for any queries or support.',
   contactInfo: {
@@ -57,12 +56,8 @@ const formSchema = z.object({
  * @returns {JSX.Element} The Contact page component.
  */
 export default function ContactPage(): JSX.Element {
-  const { translatedContent, isLoading, isTranslated } = useTranslation();
+  const { pageContent: content, isLoading, isTranslated } = useTranslation();
   const { toast } = useToast();
-
-  const content = useMemo(() => {
-    return isTranslated && translatedContent ? translatedContent : contactPageContent;
-  }, [isTranslated, translatedContent]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -79,6 +74,10 @@ export default function ContactPage(): JSX.Element {
     }
   }
 
+  if (!content) {
+    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
+  }
+  
   if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }

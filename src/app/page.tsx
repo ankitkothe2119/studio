@@ -1,14 +1,14 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTranslation } from '@/context/translation-context';
-import { BookOpen, Heart, Users, ArrowRight, GraduationCap, HeartPulse, Building } from 'lucide-react';
+import { ArrowRight, GraduationCap, HeartPulse, Building } from 'lucide-react';
 import Link from 'next/link';
 
-const homePageContent = {
+export const homePageContent = {
   hero: {
     heading: 'Building Hope, Changing Lives',
     subheading: 'Join us in creating meaningful change for communities in need through education, healthcare, and other empowerment programs worldwide.',
@@ -90,24 +90,12 @@ const icons: { [key in FocusIcon]: React.ElementType } = {
 
 
 export default function Home(): JSX.Element {
-  const { translatedContent, isLoading, isTranslated, translate } = useTranslation();
+  const { pageContent: content, isLoading, isTranslated } = useTranslation();
   
-  const content = useMemo(() => {
-    if (isTranslated && translatedContent) {
-      // Attempt to parse if it's a string
-      if (typeof translatedContent === 'string') {
-        try {
-          return JSON.parse(translatedContent);
-        } catch (e) {
-          console.error("Failed to parse translated content:", e);
-          return homePageContent; // Fallback to default
-        }
-      }
-      return translatedContent;
-    }
-    return homePageContent;
-  }, [isTranslated, translatedContent]);
-
+  if (!content) {
+    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
+  }
+  
   if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }

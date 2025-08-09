@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,7 +12,7 @@ import Link from 'next/link';
  * It displays updates, announcements, and articles related to the NGO's activities.
  */
 
-const newsPageContent = {
+export const newsPageContent = {
   title: 'News & Updates',
   subtitle: 'Stay informed about our latest activities, events, and stories.',
   articles: [
@@ -53,11 +52,11 @@ const newsPageContent = {
  * @returns {JSX.Element} The News page component.
  */
 export default function NewsPage(): JSX.Element {
-  const { translatedContent, isLoading, isTranslated } = useTranslation();
+  const { pageContent: content, isLoading, isTranslated } = useTranslation();
 
-  const content = useMemo(() => {
-    return isTranslated && translatedContent ? translatedContent : newsPageContent;
-  }, [isTranslated, translatedContent]);
+  if (!content) {
+    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
+  }
   
   if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;

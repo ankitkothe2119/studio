@@ -5,13 +5,33 @@
  * It communicates with a Genkit flow to perform the translation using an AI model.
  */
 
-import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { translateWebsiteContent } from '@/ai/flows/translate-website';
 import { useToast } from '@/hooks/use-toast';
 
+import { homePageContent } from '@/app/page';
+import { aboutPageContent } from '@/app/about/page';
+import { projectsPageContent } from '@/app/projects/page';
+import { howToHelpPageContent } from '@/app/how-to-help/page';
+import { newsPageContent } from '@/app/news/page';
+import { contactPageContent } from '@/app/contact/page';
+
+const pageContentMap: { [key: string]: any } = {
+    '/': homePageContent,
+    '/about': aboutPageContent,
+    '/projects': projectsPageContent,
+    '/how-to-help': howToHelpPageContent,
+    '/news': newsPageContent,
+    '/contact': contactPageContent
+};
+
+
 // Define the shape of the context's state.
 interface TranslationContextType {
+  originalContent: any;
   translatedContent: any;
+  pageContent: any;
   isLoading: boolean;
   isTranslated: boolean;
   translate: (contentToTranslate: any, targetLanguage: string) => Promise<void>;
@@ -27,10 +47,19 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
  * @returns {JSX.Element} The rendered provider.
  */
 export function TranslationProvider({ children }: { children: ReactNode }): JSX.Element {
+  const [originalContent, setOriginalContent] = useState<any>(null);
   const [translatedContent, setTranslatedContent] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isTranslated, setIsTranslated] = useState<boolean>(false);
   const { toast } = useToast();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const newContent = pageContentMap[pathname] || null;
+    setOriginalContent(newContent);
+    setIsTranslated(false);
+    setTranslatedContent(null);
+  }, [pathname]);
 
   const translate = useCallback(async (contentToTranslate: any, targetLanguage: string) => {
     if (!contentToTranslate) return;
@@ -73,8 +102,12 @@ export function TranslationProvider({ children }: { children: ReactNode }): JSX.
     setTranslatedContent(null);
   }, []);
 
+  const pageContent = isTranslated ? translatedContent : originalContent;
+
   const value = {
+    originalContent,
     translatedContent,
+    pageContent,
     isLoading,
     isTranslated,
     translate,

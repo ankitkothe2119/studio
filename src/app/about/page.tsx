@@ -1,15 +1,14 @@
 'use client';
 
-import { useMemo } from 'react';
 import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useTranslation } from '@/context/translation-context';
 import { Button } from '@/components/ui/button';
-import { Handshake, Target, Users, Eye, Heart, Goal } from 'lucide-react';
+import { Eye, Heart, Goal } from 'lucide-react';
 import Link from 'next/link';
 
-const aboutPageContent = {
+export const aboutPageContent = {
   hero: {
     title: 'About Hope Foundation',
     subtitle: 'Creating lasting change through compassion, dedication, and community partnership',
@@ -74,22 +73,12 @@ const icons: { [key in ValueIcon]: React.ElementType } = {
 };
 
 export default function AboutPage(): JSX.Element {
-  const { translatedContent, isLoading, isTranslated } = useTranslation();
+  const { pageContent: content, isLoading, isTranslated } = useTranslation();
 
-  const content = useMemo(() => {
-    if (isTranslated && translatedContent) {
-      if (typeof translatedContent === 'string') {
-        try {
-          return JSON.parse(translatedContent);
-        } catch (e) {
-          return aboutPageContent;
-        }
-      }
-      return translatedContent;
-    }
-    return aboutPageContent;
-  }, [isTranslated, translatedContent]);
-  
+  if (!content) {
+    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
+  }
+
   if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }

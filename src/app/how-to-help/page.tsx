@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import { useTranslation } from '@/context/translation-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,7 +11,7 @@ import Link from 'next/link';
  * It outlines various ways supporters can contribute to the cause.
  */
 
-const howToHelpPageContent = {
+export const howToHelpPageContent = {
   title: 'How You Can Help',
   subtitle: 'Your support, in any form, makes a world of difference.',
   sections: [
@@ -60,11 +59,11 @@ const icons: { [key in SectionIcon]: React.ElementType } = {
  * @returns {JSX.Element} The 'How to Help' page component.
  */
 export default function HowToHelpPage(): JSX.Element {
-  const { translatedContent, isLoading, isTranslated } = useTranslation();
+  const { pageContent: content, isLoading, isTranslated } = useTranslation();
 
-  const content = useMemo(() => {
-    return isTranslated && translatedContent ? translatedContent : howToHelpPageContent;
-  }, [isTranslated, translatedContent]);
+  if (!content) {
+    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
+  }
   
   if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;

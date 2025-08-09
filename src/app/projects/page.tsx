@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
-const projectsPageContent = {
+export const projectsPageContent = {
   hero: {
     title: 'Our Projects',
     subtitle: 'Transforming communities through sustainable development initiatives',
@@ -92,19 +92,20 @@ const projectsPageContent = {
 
 
 export default function ProjectsPage(): JSX.Element {
-  const { translatedContent, isLoading, isTranslated } = useTranslation();
+  const { pageContent: content, isLoading, isTranslated } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('All Projects');
 
-  const content = useMemo(() => {
-    return isTranslated && translatedContent ? translatedContent : projectsPageContent;
-  }, [isTranslated, translatedContent]);
-
   const filteredProjects = useMemo(() => {
+    if (!content) return [];
     if (activeFilter === 'All Projects') {
       return content.projects;
     }
     return content.projects.filter(p => p.category === activeFilter);
-  }, [activeFilter, content.projects]);
+  }, [activeFilter, content]);
+  
+  if (!content) {
+    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
+  }
   
   if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;

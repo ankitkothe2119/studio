@@ -9,36 +9,7 @@ import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import { chatWithWebsite } from '@/ai/flows/chat-flow';
 import { Avatar, AvatarFallback } from './ui/avatar';
-
-
-const pageContentMap: { [key: string]: any } = {
-    '/': 'homePageContent',
-    '/about': 'aboutPageContent',
-    '/projects': 'projectsPageContent',
-    '/how-to-help': 'howToHelpPageContent',
-    '/news': 'newsPageContent',
-    '/contact': 'contactPageContent'
-};
-
-const getPageContent = (pathname: string): any => {
-    try {
-        const pageId = pageContentMap[pathname];
-        if (!pageId) return null;
-
-        let module;
-        if (pathname === '/') {
-             module = require('@/app/page.tsx');
-        } else {
-             module = require(`@/app${pathname}/page.tsx`);
-        }
-        return module[pageId] || null;
-
-    } catch(e) {
-        console.error(`Could not load content for path: ${pathname}`, e);
-        return null;
-    }
-}
-
+import { useTranslation } from '@/context/translation-context';
 
 type Message = {
     role: 'user' | 'bot';
@@ -50,12 +21,9 @@ export function Chatbot() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const pathname = usePathname();
+    const { pageContent } = useTranslation();
     const scrollAreaRef = useRef<HTMLDivElement>(null);
     
-    const pageContent = useMemo(() => {
-       return getPageContent(pathname);
-    }, [pathname]);
 
     useEffect(() => {
         if (isOpen) {
