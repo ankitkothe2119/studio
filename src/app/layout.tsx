@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { TranslationProvider } from '@/context/translation-context';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
+import { Chatbot } from '@/components/chatbot';
 
 export const metadata: Metadata = {
   title: 'Sarthi Shiksha Roshan Seva Samiti',
@@ -43,6 +44,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
+            <Chatbot />
           </div>
         </TranslationProvider>
         <Toaster />
