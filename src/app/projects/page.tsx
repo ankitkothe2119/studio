@@ -9,7 +9,6 @@ import { useTranslation } from '@/context/translation-context';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { projectsPageContent } from '@/lib/content';
 
 
 export default function ProjectsPage(): JSX.Element {
@@ -24,11 +23,7 @@ export default function ProjectsPage(): JSX.Element {
     return content.projects.filter(p => p.category === activeFilter);
   }, [activeFilter, content]);
   
-  if (!content) {
-    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
-  }
-  
-  if (isLoading && !isTranslated) {
+  if (isLoading || !content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

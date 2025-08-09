@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/context/translation-context';
 import { Calendar, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { newsPageContent } from '@/lib/content';
 
 /**
  * @fileoverview This is the News page for the Sarthi Shiksha NGO website.
@@ -20,11 +19,7 @@ import { newsPageContent } from '@/lib/content';
 export default function NewsPage(): JSX.Element {
   const { pageContent: content, isLoading, isTranslated } = useTranslation();
 
-  if (!content) {
-    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
-  }
-  
-  if (isLoading && !isTranslated) {
+  if (isLoading || !content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

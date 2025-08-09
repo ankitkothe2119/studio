@@ -7,7 +7,6 @@ import { useTranslation } from '@/context/translation-context';
 import { Button } from '@/components/ui/button';
 import { Eye, Heart, Goal } from 'lucide-react';
 import Link from 'next/link';
-import { aboutPageContent } from '@/lib/content';
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
 const icons: { [key in ValueIcon]: React.ElementType } = {
@@ -19,11 +18,7 @@ const icons: { [key in ValueIcon]: React.ElementType } = {
 export default function AboutPage(): JSX.Element {
   const { pageContent: content, isLoading, isTranslated } = useTranslation();
 
-  if (!content) {
-    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
-  }
-
-  if (isLoading && !isTranslated) {
+  if (isLoading || !content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
   

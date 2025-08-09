@@ -9,7 +9,6 @@ import React, { createContext, useContext, useState, ReactNode, useCallback, use
 import { usePathname } from 'next/navigation';
 import { translateWebsiteContent } from '@/ai/flows/translate-website';
 import { useToast } from '@/hooks/use-toast';
-
 import { 
     homePageContent, 
     aboutPageContent, 
@@ -27,7 +26,6 @@ const pageContentMap: { [key: string]: any } = {
     '/news': newsPageContent,
     '/contact': contactPageContent
 };
-
 
 // Define the shape of the context's state.
 interface TranslationContextType {
@@ -51,7 +49,7 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
 export function TranslationProvider({ children }: { children: ReactNode }): JSX.Element {
   const [originalContent, setOriginalContent] = useState<any>(null);
   const [translatedContent, setTranslatedContent] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isTranslated, setIsTranslated] = useState<boolean>(false);
   const { toast } = useToast();
   const pathname = usePathname();
@@ -61,6 +59,7 @@ export function TranslationProvider({ children }: { children: ReactNode }): JSX.
     setOriginalContent(newContent);
     setIsTranslated(false);
     setTranslatedContent(null);
+    setIsLoading(false); 
   }, [pathname]);
 
   const translate = useCallback(async (contentToTranslate: any, targetLanguage: string) => {

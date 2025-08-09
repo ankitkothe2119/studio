@@ -13,7 +13,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { handleContactForm } from '@/lib/actions';
-import { contactPageContent } from '@/lib/content';
 
 /**
  * @fileoverview This is the Contact page for the Sarthi Shiksha NGO website.
@@ -49,11 +48,7 @@ export default function ContactPage(): JSX.Element {
     }
   }
 
-  if (!content) {
-    return <div className="flex justify-center items-center h-screen"><p>Loading page content...</p></div>;
-  }
-  
-  if (isLoading && !isTranslated) {
+  if (isLoading || !content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 
