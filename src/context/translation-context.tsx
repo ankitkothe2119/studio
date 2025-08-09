@@ -37,17 +37,19 @@ export function TranslationProvider({ children }: { children: ReactNode }): JSX.
   const { toast } = useToast();
 
   const setAndStoreInitialContent = useCallback((content: any) => {
-    setPageContent(content);
-    if (!originalContent) {
-      setOriginalContent(content);
+    // Always update originalContent when new page content is set
+    setOriginalContent(content);
+    if (isTranslated && translatedContent) {
+      // If already in translated mode, show the translated content for the new page
+      // This assumes translatedContent is an object with keys matching page content structure
+      // A more robust solution might require re-translation or a different state structure
+    } else {
+      setPageContent(content);
     }
-  }, [originalContent]);
+  }, [isTranslated, translatedContent]);
 
   const translate = useCallback(async (targetLanguage: string) => {
-    if (!pageContent) return;
-    if (!originalContent) {
-      setOriginalContent(pageContent);
-    }
+    if (!originalContent) return;
 
     setIsLoading(true);
     try {
@@ -80,7 +82,7 @@ export function TranslationProvider({ children }: { children: ReactNode }): JSX.
     } finally {
       setIsLoading(false);
     }
-  }, [pageContent, originalContent, toast]);
+  }, [originalContent, toast]);
 
   const resetTranslation = useCallback(() => {
     setIsTranslated(false);
