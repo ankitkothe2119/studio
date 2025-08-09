@@ -7,63 +7,7 @@ import { useTranslation } from '@/context/translation-context';
 import { Button } from '@/components/ui/button';
 import { Eye, Heart, Goal } from 'lucide-react';
 import Link from 'next/link';
-
-export const aboutPageContent = {
-  hero: {
-    title: 'About Hope Foundation',
-    subtitle: 'Creating lasting change through compassion, dedication, and community partnership',
-  },
-  ourStory: {
-    title: 'Our Story',
-    text: "Founded in 2012, Hope Foundation began as a small group of passionate individuals who witnessed the urgent need for sustainable development in their local communities. What started as a local initiative soon grew into a global movement, reaching across over 25 countries.\n\nThe founders, Dr. Sarah Mitchell and Marcus Thompson, were inspired by their experiences working in underserved communities, where they saw first-hand how targeted interventions could transform entire communities. Their shared belief is that the foundation of a thriving society is its people. For people to create a world where every person has access to basic human needs and opportunities for growth.\n\nToday, we continue to live that vision by working directly with communities to develop sustainable solutions that address the root causes of poverty and inequality. Our approach is built on respect, partnership, and the belief that lasting change comes from within communities themselves.",
-  },
-  missionVisionValues: {
-    title: 'Our Mission, Vision, and Values',
-    items: [
-      {
-        icon: 'Goal',
-        title: 'Our Mission',
-        description: 'To serve the most vulnerable populations by providing sustainable solutions for education, healthcare, and economic development, aiming to alleviate poverty and move toward self-sufficiency.',
-      },
-      {
-        icon: 'Eye',
-        title: 'Our Vision',
-        description: 'To create a world where every person has access to basic human needs, quality education, healthcare, and economic opportunities, regardless of their circumstances or location.',
-      },
-      {
-        icon: 'Heart',
-        title: 'Our Values',
-        description: 'Compassion, integrity, respect, sustainability, and accountability guide everything we do, from our work in the field to our internal and transparent operations.',
-      },
-    ],
-  },
-  team: {
-    title: 'Meet Our Team',
-    subtitle: 'Dedicated professionals working to create positive change',
-    members: [
-      { name: 'Dr. Sarah Mitchell', role: 'Co-Founder & CEO', avatar: 'SM', description: 'Leads our organization with a passion for sustainable development and community empowerment.' },
-      { name: 'Marcus Thompson', role: 'Project Manager', avatar: 'MT', description: 'Ensuring our global projects are delivered on time and with the greatest possible impact on communities.' },
-      { name: 'Emily Chen', role: 'Head of Partnerships', avatar: 'EC', description: 'Building strategic relationships that help us expand our reach and amplify our impact.' },
-      { name: 'David Rodriguez', role: 'Field Coordinator', avatar: 'DR', description: 'Coordinating our grassroots efforts, ensuring our projects meet the real needs of communities.' },
-    ],
-  },
-  journey: {
-    title: 'Our Journey',
-    subtitle: 'Key milestones in our mission to create positive change',
-    milestones: [
-        { year: '2010', title: 'Foundation Established', description: 'Hope Foundation is born with a mission to create sustainable change in underserved communities.'},
-        { year: '2015', title: 'Global Expansion', description: 'Programs expanded to 10 new countries, reaching over 10,000 direct beneficiaries.'},
-        { year: '2020', title: 'Major Milestone', description: 'Reached 25,000 beneficiaries through education, health, and economic development programs.'},
-        { year: '2024', title: '50,000+ Lives Touched', description: 'Continuing to build on our success, with projects reaching over 50,000 lives annually.'},
-    ]
-  },
-  cta: {
-      title: 'Join Our Mission',
-      text: 'Be part of our story and help us create even greater impact in communities around the world.',
-      button1: 'Get Involved',
-      button2: 'Contact Us',
-  }
-};
+import { aboutPageContent } from '@/lib/content';
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
 const icons: { [key in ValueIcon]: React.ElementType } = {

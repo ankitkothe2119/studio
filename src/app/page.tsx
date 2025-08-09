@@ -8,78 +8,7 @@ import { useTranslation } from '@/context/translation-context';
 import { ArrowRight, GraduationCap, HeartPulse, Building } from 'lucide-react';
 import Link from 'next/link';
 
-export const homePageContent = {
-  hero: {
-    heading: 'Building Hope, Changing Lives',
-    subheading: 'Join us in creating meaningful change for communities in need through education, healthcare, and other empowerment programs worldwide.',
-    cta1: 'Donate Now',
-    cta2: 'Read More',
-  },
-  impact: {
-    title: 'Our Impact in Numbers',
-    stats: [
-      { number: '50,000+', label: 'Lives Touched' },
-      { number: '120', label: 'Projects Completed' },
-      { number: '25', label: 'Countries Served' },
-      { number: '5,000+', label: 'Volunteers' },
-    ],
-  },
-  mission: {
-    title: 'Our Mission',
-    text: "At Sarthi Shiksha, we are dedicated to improving lives in underserved communities through sustainable and impactful programs. Our mission is to provide access to quality education, healthcare, and economic opportunities, empowering individuals to build a better future for themselves and their families.",
-    cta: 'Learn About Us',
-  },
-  focus: {
-    title: 'Our Focus Areas',
-    areas: [
-      {
-        icon: 'GraduationCap',
-        title: 'Education',
-        description: 'Building schools, providing learning materials, and supporting teachers to ensure every child has access to quality education.',
-      },
-      {
-        icon: 'HeartPulse',
-        title: 'Healthcare',
-        description: 'Operating medical clinics, organizing health camps, and promoting preventive care to improve community well-being.',
-      },
-      {
-        icon: 'Building',
-        title: 'Community Development',
-        description: 'Creating job opportunities, supporting small businesses, and improving local infrastructure to foster self-reliant communities.',
-      },
-    ],
-  },
-  projects: {
-    title: 'Recent Projects',
-    subtitle: 'See how we are making a difference in the lives of many.',
-    items: [
-      {
-        image: { src: 'https://placehold.co/600x400.png', hint: 'school building' },
-        title: 'School Construction in Kenya',
-        description: 'Building a new primary school to provide a safe learning environment for over 300 children.',
-        link: '#',
-      },
-      {
-        image: { src: 'https://placehold.co/600x400.png', hint: 'clean water' },
-        title: 'Clean Water Initiative',
-        description: 'Installing water purification systems to provide access to clean and safe drinking water for a community of 5,000 people.',
-        link: '#',
-      },
-      {
-        image: { src: 'https://placehold.co/600x400.png', hint: 'medical clinic' },
-        title: 'Mobile Health Clinic',
-        description: 'Launching a mobile clinic to deliver essential healthcare services to remote and underserved populations.',
-        link: '#',
-      },
-    ],
-  },
-  ctaSection: {
-    title: 'Ready to Make a Difference?',
-    text: "Your contribution, no matter the size, can help us create a stronger, more just world. Join our network of supporters who are creating positive change around the world.",
-    button1: 'Start Donating Today',
-    button2: 'Volunteer',
-  },
-};
+import { homePageContent } from '@/lib/content';
 
 type FocusIcon = 'GraduationCap' | 'HeartPulse' | 'Building';
 const icons: { [key in FocusIcon]: React.ElementType } = {

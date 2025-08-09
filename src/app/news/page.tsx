@@ -6,46 +6,12 @@ import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/context/translation-context';
 import { Calendar, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { newsPageContent } from '@/lib/content';
 
 /**
  * @fileoverview This is the News page for the Sarthi Shiksha NGO website.
  * It displays updates, announcements, and articles related to the NGO's activities.
  */
-
-export const newsPageContent = {
-  title: 'News & Updates',
-  subtitle: 'Stay informed about our latest activities, events, and stories.',
-  articles: [
-    {
-      title: 'Successful Completion of Annual Summer Camp',
-      date: 'August 15, 2024',
-      image: { src: 'https://placehold.co/600x400.png', hint: 'children playing' },
-      excerpt: 'Our annual summer camp for underprivileged children concluded successfully, providing a fun and educational experience for over 100 kids. The camp included activities like art, sports, and basic computer literacy.',
-      link: '#',
-    },
-    {
-      title: 'New Community Library Inaugurated',
-      date: 'July 28, 2024',
-      image: { src: 'https://placehold.co/600x400.png', hint: 'library books' },
-      excerpt: 'We are thrilled to announce the opening of a new community library in the village of Rampur. The library aims to foster a love for reading among children and adults alike.',
-      link: '#',
-    },
-    {
-      title: 'Healthcare Awareness Drive Reaches 5000+ People',
-      date: 'July 05, 2024',
-      image: { src: 'https://placehold.co/600x400.png', hint: 'doctor patient' },
-      excerpt: 'Our recent healthcare awareness drive, part of the Swasthya Abhiyan project, successfully reached over 5000 individuals, providing them with essential health information and check-ups.',
-      link: '#',
-    },
-    {
-      title: 'Volunteer Appreciation Day',
-      date: 'June 20, 2024',
-      image: { src: 'https://placehold.co/600x400.png', hint: 'group people' },
-      excerpt: 'We celebrated our incredible team of volunteers whose dedication and hard work are the backbone of our organization. Thank you for your selfless service!',
-      link: '#',
-    },
-  ],
-};
 
 /**
  * Renders the News page.

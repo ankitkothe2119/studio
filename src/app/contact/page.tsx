@@ -13,37 +13,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { handleContactForm } from '@/lib/actions';
+import { contactPageContent } from '@/lib/content';
 
 /**
  * @fileoverview This is the Contact page for the Sarthi Shiksha NGO website.
  * It provides a contact form, address, and other contact details.
  */
-
-export const contactPageContent = {
-  title: 'Contact Us',
-  subtitle: 'We would love to hear from you. Get in touch with us for any queries or support.',
-  contactInfo: {
-    address: '123 Seva Marg, Community Nagar, New Delhi, India 110001',
-    phone: '+91 12345 67890',
-    email: 'info@sarthishiksha.org',
-  },
-  form: {
-    nameLabel: 'Your Name',
-    namePlaceholder: 'Enter your full name',
-    emailLabel: 'Your Email',
-    emailPlaceholder: 'Enter your email address',
-    messageLabel: 'Your Message',
-    messagePlaceholder: 'Type your message here...',
-    submitButton: 'Send Message',
-    successTitle: 'Message Sent!',
-    successDescription: 'Thank you for reaching out. We will get back to you soon.',
-    errorTitle: 'Error',
-    errorDescription: 'Something went wrong. Please try again.'
-  },
-  map: {
-    title: 'Our Location',
-  }
-};
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),

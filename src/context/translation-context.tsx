@@ -10,12 +10,14 @@ import { usePathname } from 'next/navigation';
 import { translateWebsiteContent } from '@/ai/flows/translate-website';
 import { useToast } from '@/hooks/use-toast';
 
-import { homePageContent } from '@/app/page';
-import { aboutPageContent } from '@/app/about/page';
-import { projectsPageContent } from '@/app/projects/page';
-import { howToHelpPageContent } from '@/app/how-to-help/page';
-import { newsPageContent } from '@/app/news/page';
-import { contactPageContent } from '@/app/contact/page';
+import { 
+    homePageContent, 
+    aboutPageContent, 
+    projectsPageContent, 
+    howToHelpPageContent, 
+    newsPageContent, 
+    contactPageContent 
+} from '@/lib/content';
 
 const pageContentMap: { [key: string]: any } = {
     '/': homePageContent,
