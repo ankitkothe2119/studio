@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -57,19 +57,13 @@ const formSchema = z.object({
  * @returns {JSX.Element} The Contact page component.
  */
 export default function ContactPage(): JSX.Element {
-  const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
+  const { translatedContent, isLoading, isTranslated } = useTranslation();
   const { toast } = useToast();
 
   const content = useMemo(() => {
-    return pageContent ? pageContent : contactPageContent;
-  }, [pageContent]);
+    return isTranslated && translatedContent ? translatedContent : contactPageContent;
+  }, [isTranslated, translatedContent]);
 
-  useEffect(() => {
-    if (!isTranslated) {
-      setPageContent(contactPageContent);
-    }
-  }, [isTranslated, setPageContent]);
-  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: '', email: '', message: '' },
@@ -85,7 +79,7 @@ export default function ContactPage(): JSX.Element {
     }
   }
 
-  if (isLoading && !pageContent) {
+  if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -53,19 +53,13 @@ const newsPageContent = {
  * @returns {JSX.Element} The News page component.
  */
 export default function NewsPage(): JSX.Element {
-  const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
+  const { translatedContent, isLoading, isTranslated } = useTranslation();
 
   const content = useMemo(() => {
-    return pageContent ? pageContent : newsPageContent;
-  }, [pageContent]);
+    return isTranslated && translatedContent ? translatedContent : newsPageContent;
+  }, [isTranslated, translatedContent]);
   
-  useEffect(() => {
-    if (!isTranslated) {
-      setPageContent(newsPageContent);
-    }
-  }, [isTranslated, setPageContent]);
-
-  if (isLoading && !pageContent) {
+  if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

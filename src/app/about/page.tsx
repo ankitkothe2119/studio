@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -62,19 +62,13 @@ const icons: { [key in ValueIcon]: React.ElementType } = {
  * @returns {JSX.Element} The About Us page component.
  */
 export default function AboutPage(): JSX.Element {
-  const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
+  const { translatedContent, isLoading, isTranslated } = useTranslation();
 
   const content = useMemo(() => {
-    return pageContent ? pageContent : aboutPageContent;
-  }, [pageContent]);
+    return isTranslated && translatedContent ? translatedContent : aboutPageContent;
+  }, [isTranslated, translatedContent]);
   
-  useEffect(() => {
-    if (!isTranslated) {
-      setPageContent(aboutPageContent);
-    }
-  }, [isTranslated, setPageContent]);
-
-  if (isLoading && !pageContent) {
+  if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
   

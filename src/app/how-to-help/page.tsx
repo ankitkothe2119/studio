@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from '@/context/translation-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -60,19 +60,13 @@ const icons: { [key in SectionIcon]: React.ElementType } = {
  * @returns {JSX.Element} The 'How to Help' page component.
  */
 export default function HowToHelpPage(): JSX.Element {
-  const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
+  const { translatedContent, isLoading, isTranslated } = useTranslation();
 
   const content = useMemo(() => {
-    return pageContent ? pageContent : howToHelpPageContent;
-  }, [pageContent]);
+    return isTranslated && translatedContent ? translatedContent : howToHelpPageContent;
+  }, [isTranslated, translatedContent]);
   
-  useEffect(() => {
-    if (!isTranslated) {
-      setPageContent(howToHelpPageContent);
-    }
-  }, [isTranslated, setPageContent]);
-
-  if (isLoading && !pageContent) {
+  if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
   

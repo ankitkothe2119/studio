@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -60,19 +60,13 @@ const projectsPageContent = {
  * @returns {JSX.Element} The Projects page component.
  */
 export default function ProjectsPage(): JSX.Element {
-  const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
+  const { translatedContent, isLoading, isTranslated } = useTranslation();
 
   const content = useMemo(() => {
-    return pageContent ? pageContent : projectsPageContent;
-  }, [pageContent]);
-
-  useEffect(() => {
-    if (!isTranslated) {
-      setPageContent(projectsPageContent);
-    }
-  }, [isTranslated, setPageContent]);
+    return isTranslated && translatedContent ? translatedContent : projectsPageContent;
+  }, [isTranslated, translatedContent]);
   
-  if (isLoading && !pageContent) {
+  if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

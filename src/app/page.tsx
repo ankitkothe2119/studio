@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -62,21 +62,14 @@ const icons: { [key in FeatureIcon]: React.ElementType } = {
  * @returns {JSX.Element} The Home page component.
  */
 export default function Home(): JSX.Element {
-  const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
+  const { translatedContent, isLoading, isTranslated } = useTranslation();
 
   // Memoize the content to prevent re-renders unless the source content changes.
   const content = useMemo(() => {
-    return pageContent ? pageContent : homePageContent;
-  }, [pageContent]);
-
-  // Set the initial content for the translation context when the component mounts.
-  useEffect(() => {
-    if (!isTranslated) {
-      setPageContent(homePageContent);
-    }
-  }, [setPageContent, isTranslated]);
+    return isTranslated && translatedContent ? translatedContent : homePageContent;
+  }, [isTranslated, translatedContent]);
   
-  if (isLoading && !pageContent) {
+  if (isLoading && !isTranslated) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 
