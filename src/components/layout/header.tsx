@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { Menu, X, BookHeart } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
 import { LanguageSwitcher } from '@/components/language-switcher';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -81,12 +81,13 @@ export function Header(): JSX.Element {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-3/4 bg-background p-6">
-               <div className="mb-8 flex justify-between items-center">
-                 <span className="text-lg font-bold font-headline text-primary">Menu</span>
+              <SheetHeader className="mb-8 flex flex-row justify-between items-center text-left">
+                <SheetTitle className="text-lg font-bold font-headline text-primary">Menu</SheetTitle>
+                <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
                  <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
                    <X className="h-6 w-6" />
                  </Button>
-               </div>
+               </SheetHeader>
                {renderNavLinks(true)}
                <div className="mt-8 border-t pt-6">
                  <LanguageSwitcher />
