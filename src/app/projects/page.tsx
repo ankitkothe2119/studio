@@ -63,16 +63,16 @@ export default function ProjectsPage(): JSX.Element {
   const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
 
   const content = useMemo(() => {
-    return isTranslated && pageContent ? pageContent : projectsPageContent;
-  }, [isTranslated, pageContent]);
+    return pageContent ? pageContent : projectsPageContent;
+  }, [pageContent]);
 
   useEffect(() => {
     if (!isTranslated) {
       setPageContent(projectsPageContent);
     }
-  }, [isTranslated, setPageContent, resetTranslation]);
+  }, [isTranslated, setPageContent]);
   
-  if (isLoading && !isTranslated) {
+  if (isLoading && !pageContent) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

@@ -61,14 +61,14 @@ export default function ContactPage(): JSX.Element {
   const { toast } = useToast();
 
   const content = useMemo(() => {
-    return isTranslated && pageContent ? pageContent : contactPageContent;
-  }, [isTranslated, pageContent]);
+    return pageContent ? pageContent : contactPageContent;
+  }, [pageContent]);
 
   useEffect(() => {
     if (!isTranslated) {
       setPageContent(contactPageContent);
     }
-  }, [isTranslated, setPageContent, resetTranslation]);
+  }, [isTranslated, setPageContent]);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -85,7 +85,7 @@ export default function ContactPage(): JSX.Element {
     }
   }
 
-  if (isLoading && !isTranslated) {
+  if (isLoading && !pageContent) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

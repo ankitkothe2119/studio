@@ -30,18 +30,29 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
  */
 export function TranslationProvider({ children }: { children: ReactNode }): JSX.Element {
   const [pageContent, setPageContent] = useState<any>(null);
+  const [originalContent, setOriginalContent] = useState<any>(null);
   const [translatedContent, setTranslatedContent] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isTranslated, setIsTranslated] = useState<boolean>(false);
   const { toast } = useToast();
 
+  const setAndStoreInitialContent = useCallback((content: any) => {
+    setPageContent(content);
+    if (!originalContent) {
+      setOriginalContent(content);
+    }
+  }, [originalContent]);
+
   const translate = useCallback(async (targetLanguage: string) => {
     if (!pageContent) return;
+    if (!originalContent) {
+      setOriginalContent(pageContent);
+    }
 
     setIsLoading(true);
     try {
       // The AI expects a string, so we stringify the JSON content.
-      const contentString = JSON.stringify(pageContent, null, 2);
+      const contentString = JSON.stringify(originalContent, null, 2);
       
       const result = await translateWebsiteContent({ 
         text: contentString, 
@@ -69,19 +80,19 @@ export function TranslationProvider({ children }: { children: ReactNode }): JSX.
     } finally {
       setIsLoading(false);
     }
-  }, [pageContent, toast]);
+  }, [pageContent, originalContent, toast]);
 
   const resetTranslation = useCallback(() => {
-    // This function will be called by pages to reset to original content
-    // The actual reset logic is handled within each page's useEffect
     setIsTranslated(false);
     setTranslatedContent(null);
-    // Let the pages reset their content to original
-  }, []);
+    if (originalContent) {
+      setPageContent(originalContent);
+    }
+  }, [originalContent]);
 
   const value = {
     pageContent,
-    setPageContent,
+    setPageContent: setAndStoreInitialContent,
     translatedContent,
     isLoading,
     isTranslated,

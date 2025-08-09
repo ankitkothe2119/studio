@@ -62,19 +62,21 @@ const icons: { [key in FeatureIcon]: React.ElementType } = {
  * @returns {JSX.Element} The Home page component.
  */
 export default function Home(): JSX.Element {
-  const { pageContent, setPageContent, isTranslated, isLoading } = useTranslation();
+  const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
 
   // Memoize the content to prevent re-renders unless the source content changes.
   const content = useMemo(() => {
-    return isTranslated && pageContent ? pageContent : homePageContent;
-  }, [isTranslated, pageContent]);
+    return pageContent ? pageContent : homePageContent;
+  }, [pageContent]);
 
   // Set the initial content for the translation context when the component mounts.
   useEffect(() => {
-    setPageContent(homePageContent);
-  }, [setPageContent]);
+    if (!isTranslated) {
+      setPageContent(homePageContent);
+    }
+  }, [setPageContent, isTranslated]);
   
-  if (isLoading && !isTranslated) {
+  if (isLoading && !pageContent) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

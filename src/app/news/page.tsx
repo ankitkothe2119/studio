@@ -56,16 +56,16 @@ export default function NewsPage(): JSX.Element {
   const { pageContent, setPageContent, isTranslated, isLoading, resetTranslation } = useTranslation();
 
   const content = useMemo(() => {
-    return isTranslated && pageContent ? pageContent : newsPageContent;
-  }, [isTranslated, pageContent]);
+    return pageContent ? pageContent : newsPageContent;
+  }, [pageContent]);
   
   useEffect(() => {
     if (!isTranslated) {
       setPageContent(newsPageContent);
     }
-  }, [isTranslated, setPageContent, resetTranslation]);
+  }, [isTranslated, setPageContent]);
 
-  if (isLoading && !isTranslated) {
+  if (isLoading && !pageContent) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 
