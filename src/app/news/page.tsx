@@ -1,11 +1,13 @@
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/context/translation-context';
 import { Calendar, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { newsPageContent } from '@/lib/content';
 
 /**
  * @fileoverview This is the News page for the Sarthi Shiksha NGO website.

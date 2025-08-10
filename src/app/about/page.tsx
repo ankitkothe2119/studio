@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -7,6 +8,7 @@ import { useTranslation } from '@/context/translation-context';
 import { Button } from '@/components/ui/button';
 import { Eye, Heart, Goal } from 'lucide-react';
 import Link from 'next/link';
+import { aboutPageContent } from '@/lib/content';
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
 const icons: { [key in ValueIcon]: React.ElementType } = {

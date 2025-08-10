@@ -5,10 +5,10 @@
  * It communicates with a Genkit flow to perform the translation using an AI model.
  */
 
-import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { translateWebsiteContent } from '@/ai/flows/translate-website';
 import { useToast } from '@/hooks/use-toast';
+import { usePathname } from 'next/navigation';
 import { 
     homePageContent, 
     aboutPageContent, 
@@ -29,8 +29,6 @@ const pageContentMap: { [key: string]: any } = {
 
 // Define the shape of the context's state.
 interface TranslationContextType {
-  originalContent: any;
-  translatedContent: any;
   pageContent: any;
   isLoading: boolean;
   isTranslated: boolean;
@@ -54,13 +52,14 @@ export function TranslationProvider({ children }: { children: ReactNode }): JSX.
   const { toast } = useToast();
   const pathname = usePathname();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const newContent = pageContentMap[pathname] || null;
     setOriginalContent(newContent);
-    setIsTranslated(false);
     setTranslatedContent(null);
-    setIsLoading(false); 
+    setIsTranslated(false);
+    setIsLoading(false);
   }, [pathname]);
+
 
   const translate = useCallback(async (contentToTranslate: any, targetLanguage: string) => {
     if (!contentToTranslate) return;
@@ -106,10 +105,8 @@ export function TranslationProvider({ children }: { children: ReactNode }): JSX.
   const pageContent = isTranslated ? translatedContent : originalContent;
 
   const value = {
-    originalContent,
-    translatedContent,
     pageContent,
-    isLoading,
+    isLoading: isLoading || (!isTranslated && !originalContent) || (isTranslated && !translatedContent),
     isTranslated,
     translate,
     resetTranslation,
