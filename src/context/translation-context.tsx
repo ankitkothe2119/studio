@@ -106,7 +106,7 @@ export function TranslationProvider({ children }: { children: ReactNode }): JSX.
 
   const value = {
     pageContent,
-    isLoading: isLoading || (!isTranslated && !originalContent) || (isTranslated && !translatedContent),
+    isLoading: isLoading,
     isTranslated,
     translate,
     resetTranslation,
