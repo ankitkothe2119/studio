@@ -11,7 +11,6 @@ import { Menu, X, BookHeart } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
-import { LanguageSwitcher } from '@/components/language-switcher';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -89,15 +88,11 @@ export function Header(): JSX.Element {
                  </Button>
                </SheetHeader>
                {renderNavLinks(true)}
-               <div className="mt-8 border-t pt-6">
-                 <LanguageSwitcher />
-               </div>
             </SheetContent>
           </Sheet>
         ) : (
           <div className="flex items-center gap-4">
             {renderNavLinks()}
-            <LanguageSwitcher />
           </div>
         )}
       </div>

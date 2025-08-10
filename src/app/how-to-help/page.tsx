@@ -1,12 +1,11 @@
 'use client';
 
 import React from 'react';
-import { useTranslation } from '@/context/translation-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Heart, Users, DollarSign, Mail } from 'lucide-react';
 import Link from 'next/link';
-import { howToHelpPageContent } from '@/lib/content';
+import { howToHelpPageContent as content } from '@/lib/content';
 
 /**
  * @fileoverview This is the 'How to Help' page for the Sarthi Shiksha NGO website.
@@ -26,9 +25,8 @@ const icons: { [key in SectionIcon]: React.ElementType } = {
  * @returns {JSX.Element} The 'How to Help' page component.
  */
 export default function HowToHelpPage(): JSX.Element {
-  const { pageContent: content, isLoading, isTranslated } = useTranslation();
 
-  if (isLoading || !content) {
+  if (!content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
   

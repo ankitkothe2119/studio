@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { useTranslation } from '@/context/translation-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -14,7 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { handleContactForm } from '@/lib/actions';
-import { contactPageContent } from '@/lib/content';
+import { contactPageContent as content } from '@/lib/content';
 
 /**
  * @fileoverview This is the Contact page for the Sarthi Shiksha NGO website.
@@ -32,7 +31,6 @@ const formSchema = z.object({
  * @returns {JSX.Element} The Contact page component.
  */
 export default function ContactPage(): JSX.Element {
-  const { pageContent: content, isLoading, isTranslated } = useTranslation();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -50,7 +48,7 @@ export default function ContactPage(): JSX.Element {
     }
   }
 
-  if (isLoading || !content) {
+  if (!content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

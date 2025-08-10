@@ -1,15 +1,32 @@
 'use client';
 
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { MessageSquare, X, Send, Bot, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { usePathname } from 'next/navigation';
 import { chatWithWebsite } from '@/ai/flows/chat-flow';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import { useTranslation } from '@/context/translation-context';
+import { usePathname } from 'next/navigation';
+import { 
+    homePageContent, 
+    aboutPageContent, 
+    projectsPageContent, 
+    howToHelpPageContent, 
+    newsPageContent, 
+    contactPageContent 
+} from '@/lib/content';
+
+const pageContentMap: { [key: string]: any } = {
+    '/': homePageContent,
+    '/about': aboutPageContent,
+    '/projects': projectsPageContent,
+    '/how-to-help': howToHelpPageContent,
+    '/news': newsPageContent,
+    '/contact': contactPageContent
+};
+
 
 type Message = {
     role: 'user' | 'bot';
@@ -21,8 +38,13 @@ export function Chatbot() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const { pageContent } = useTranslation();
     const scrollAreaRef = useRef<HTMLDivElement>(null);
+    const pathname = usePathname();
+    const [pageContent, setPageContent] = useState<any>(null);
+
+    useEffect(() => {
+        setPageContent(pageContentMap[pathname] || null);
+    }, [pathname]);
     
 
     useEffect(() => {
@@ -47,7 +69,7 @@ export function Chatbot() {
 
 
     const handleSend = async () => {
-        if (input.trim() === '' || isLoading) return;
+        if (input.trim() === '' || isLoading || !pageContent) return;
 
         const userMessage: Message = { role: 'user', text: input };
         setMessages(prev => [...prev, userMessage]);

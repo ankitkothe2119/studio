@@ -4,10 +4,9 @@ import React from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { useTranslation } from '@/context/translation-context';
 import { Calendar, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { newsPageContent } from '@/lib/content';
+import { newsPageContent as content } from '@/lib/content';
 
 /**
  * @fileoverview This is the News page for the Sarthi Shiksha NGO website.
@@ -19,9 +18,8 @@ import { newsPageContent } from '@/lib/content';
  * @returns {JSX.Element} The News page component.
  */
 export default function NewsPage(): JSX.Element {
-  const { pageContent: content, isLoading, isTranslated } = useTranslation();
-
-  if (isLoading || !content) {
+  
+  if (!content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

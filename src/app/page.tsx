@@ -4,10 +4,9 @@ import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { useTranslation } from '@/context/translation-context';
 import { ArrowRight, GraduationCap, HeartPulse, Building } from 'lucide-react';
 import Link from 'next/link';
-import { homePageContent } from '@/lib/content';
+import { homePageContent as content } from '@/lib/content';
 
 
 type FocusIcon = 'GraduationCap' | 'HeartPulse' | 'Building';
@@ -19,9 +18,8 @@ const icons: { [key in FocusIcon]: React.ElementType } = {
 
 
 export default function Home(): JSX.Element {
-  const { pageContent: content, isLoading, isTranslated } = useTranslation();
   
-  if (isLoading || !content) {
+  if (!content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 

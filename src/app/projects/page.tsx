@@ -5,15 +5,13 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useTranslation } from '@/context/translation-context';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { projectsPageContent } from '@/lib/content';
+import { projectsPageContent as content } from '@/lib/content';
 
 
 export default function ProjectsPage(): JSX.Element {
-  const { pageContent: content, isLoading, isTranslated } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('All Projects');
 
   const filteredProjects = useMemo(() => {
@@ -24,7 +22,7 @@ export default function ProjectsPage(): JSX.Element {
     return content.projects.filter(p => p.category === activeFilter);
   }, [activeFilter, content]);
   
-  if (isLoading || !content) {
+  if (!content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 
