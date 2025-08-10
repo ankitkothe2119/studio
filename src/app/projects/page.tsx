@@ -20,7 +20,7 @@ export default function ProjectsPage(): JSX.Element {
       return content.projects;
     }
     return content.projects.filter(p => p.category === activeFilter);
-  }, [activeFilter, content]);
+  }, [activeFilter]);
   
   if (!content) {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;

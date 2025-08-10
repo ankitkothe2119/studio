@@ -40,12 +40,6 @@ export function Chatbot() {
     const [isLoading, setIsLoading] = useState(false);
     const scrollAreaRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
-    const [pageContent, setPageContent] = useState<any>(null);
-
-    useEffect(() => {
-        setPageContent(pageContentMap[pathname] || null);
-    }, [pathname]);
-    
 
     useEffect(() => {
         if (isOpen) {
@@ -69,6 +63,7 @@ export function Chatbot() {
 
 
     const handleSend = async () => {
+        const pageContent = pageContentMap[pathname] || null;
         if (input.trim() === '' || isLoading || !pageContent) return;
 
         const userMessage: Message = { role: 'user', text: input };
