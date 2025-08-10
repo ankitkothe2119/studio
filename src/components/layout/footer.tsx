@@ -3,7 +3,8 @@
  * It provides copyright information and branding at the bottom of each page.
  */
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Linkedin, BookHeart } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import Image from 'next/image';
 
 /**
  * The Footer component for the application.
@@ -16,7 +17,7 @@ export function Footer(): JSX.Element {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
                 <Link href="/" className="flex items-center gap-2 mb-4">
-                    <BookHeart className="h-8 w-8 text-primary" />
+                    <Image src="/logo.png" alt="Sarthi Shiksha Logo" width={50} height={50} className="rounded-full" />
                     <span className="text-xl font-headline font-bold tracking-tight text-white">
                         Sarthi Shiksha
                     </span>

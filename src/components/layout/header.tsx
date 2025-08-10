@@ -7,12 +7,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { Menu, X, BookHeart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import Image from 'next/image';
 
 
 const navLinks = [
@@ -63,9 +64,9 @@ export function Header(): JSX.Element {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2" passHref>
-          <div className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
-            <BookHeart className="h-8 w-8" />
-            <span className="text-xl font-headline font-bold tracking-tight">
+          <div className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors">
+            <Image src="/logo.png" alt="Sarthi Shiksha Logo" width={50} height={50} className="rounded-full"/>
+            <span className="text-xl font-headline font-bold tracking-tight text-foreground">
               Sarthi Shiksha
             </span>
           </div>
