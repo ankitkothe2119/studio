@@ -195,9 +195,9 @@ export async function deleteTeamMember(id: string) {
 // Admin Auth Actions
 
 const signupSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  password: z.string().min(6),
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  email: z.string().email({ message: 'Please enter a valid email.' }),
+  password: z.string().min(6, { message: 'Password must be at least 6 characters.' }),
 });
 
 export async function adminSignup(data: unknown) {
@@ -224,8 +224,8 @@ export async function adminSignup(data: unknown) {
 }
 
 const loginSchema = z.object({
-    email: z.string().email(),
-    password: z.string(),
+  email: z.string().email({ message: 'Please enter a valid email.' }),
+  password: z.string().min(1, { message: 'Password is required.' }),
 });
 
 export async function adminLogin(data: unknown) {
