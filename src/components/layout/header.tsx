@@ -67,10 +67,10 @@ export function Header(): JSX.Element {
         <Link href="/" className="flex items-center gap-2 group" passHref>
           <div className="flex items-center gap-3 text-primary group-hover:text-primary/80 transition-colors">
             <Image src="/logo.png" alt="Sarthi Shiksha Roshan Seva Samiti Logo" width={50} height={50} className="rounded-full"/>
-            <span className="text-xl font-headline font-bold tracking-tight text-foreground">
-              Sarthi Shiksha
-              <span className="hidden md:inline group-hover:inline"> Roshan Seva Samiti</span>
-            </span>
+             <div className="text-xl font-headline font-bold tracking-tight text-foreground">
+                <span className="hidden md:inline">Sarthi Shiksha Roshan Seva Samiti</span>
+                <span className="inline md:hidden">Sarthi Shiksha</span>
+            </div>
           </div>
         </Link>
         
