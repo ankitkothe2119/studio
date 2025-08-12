@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,9 +12,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { handleContactForm } from '@/lib/actions';
-import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { CreditCard, CheckCircle } from 'lucide-react';
+import { CreditCard, CheckCircle, Landmark } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type FormType = 'Donate' | 'Volunteer' | 'Partner';
 type FormStep = 'form' | 'payment' | 'confirmation';
@@ -82,7 +83,6 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
     if (!open) {
-      // Reset state when dialog closes
       setTimeout(() => {
         form.reset();
         setFormStep('form');
@@ -113,16 +113,14 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
     if (!formData) return;
     setIsSubmitting(true);
 
-    // Here you would integrate with a real payment gateway
     console.log(`Processing ${paymentMethod} payment for:`, formData);
-
     const result = await handleContactForm(formData);
     
     if (result.success) {
       setFormStep('confirmation');
     } else {
       toast({ title: 'Error', description: 'Something went wrong with the submission. Please try again.', variant: 'destructive' });
-      setFormStep('form'); // Go back to the form
+      setFormStep('form');
     }
     setIsSubmitting(false);
   }
@@ -210,7 +208,7 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
 
   const getDialogTitle = () => {
     if (formType === 'Donate') {
-        if (formStep === 'payment') return 'Select Payment Method';
+        if (formStep === 'payment') return 'Complete Your Donation';
         if (formStep === 'confirmation') return 'Thank You!';
     }
     return formType === 'Partner' ? 'Corporate Partnership' : formType;
@@ -238,33 +236,77 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
 
         {formStep === 'form' && (
              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
                     {renderFormFields()}
                     <Button type="submit" className="w-full" disabled={form.formState.isSubmitting || isSubmitting}>
-                    {form.formState.isSubmitting ? 'Submitting...' : formType === 'Donate' ? 'Proceed to Payment' : 'Submit'}
+                    {isSubmitting ? 'Submitting...' : formType === 'Donate' ? 'Proceed to Payment' : 'Submit'}
                     </Button>
                 </form>
             </Form>
         )}
 
         {formStep === 'payment' && (
-            <div className="space-y-4">
-                 <Button className="w-full justify-start" size="lg" disabled={isSubmitting} onClick={() => handlePayment('Credit Card')}>
-                    <CreditCard className="mr-2 h-5 w-5" /> Credit / Debit Card
-                 </Button>
-                 <Button className="w-full justify-start" size="lg" disabled={isSubmitting} onClick={() => handlePayment('PayPal')}>
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="mr-2 h-5 w-5 fill-current"><title>PayPal</title><path d="M7.076 21.337H2.478l.182-1.183c.232-1.531.6-3.044 1.138-4.499.537-1.454 1.228-2.83 2.05-4.086C6.674 9.82 7.558 8.63 8.56 7.527c1.004-1.102 2.103-2.035 3.27-2.76v-.002c.004-.002.01-.002.014-.004l.014-.005.016-.004.017-.004.019-.003.02-.003.022-.003.023-.002.025-.002.027-.002.028-.002.03-.002.03-.001.033-.001.034-.001.036-.001c.02.001.038.002.057.003l.02.001c.003 0 .005.001.008.001l.033.002.025.002.027.002.023.002c.008.001.017.001.025.002l.022.002.02.003.018.003.016.003.014.004.013.004.01.004c.004.001.007.003.01.004v.002c1.222.756 2.362 1.74 3.41 2.926.113.128.225.257.336.386.99 1.149 1.833 2.426 2.494 3.79.66 1.362 1.125 2.81 1.373 4.308l.142.846h-4.63c-.152-.94-.492-1.834-1.01-2.631-.52- P.798-1.22-1.503-2.064-2.074-.845-.57-1.82-.983-2.88-1.21-.033-.007-.066-.013-.1-.02-.05-.013-.102-.023-.153-.034-.11-.023-.222-.043-.335-.06-.05-.008-.1-.015-.15-.022-.08-.012-.16-.022-.24-.032l-.043-.005c-.06-.008-.118-.015-.178-.02-.05-.004-.098-.008-.147-.012l-.03-.002c-.056-.004-.112-.007-.168-.009-.13-.006-.26-.009-.39-.009H7.076v.003Z M16.304 4.113c.473 1.32.724 2.708.724 4.132 0 1.54-.29 3.033-.85 4.433-.562 1.4-1.343 2.686-2.31 3.78-.97 1.092-2.13 1.956-3.415 2.545-1.287.59-2.658.885-4.06.885H2.23l.562-3.488c.227-1.402.634-2.793 1.205-4.12.57-1.326 1.29-2.585 2.14-3.717.848-1.134 1.82-2.14 2.87-2.98.02-.015.038-.03.057-.044.984-.74 2.05-1.323 3.155-1.724a.423.423 0 0 1 .012-.003c.11-.038.22-.075.33-.11l.01-.003c.08-.025.16-.05.24-.074l.014-.004c.1-.028.2-.055.3-.08.016-.004.032-.008.047-.012l.023-.007c.09-.024.18-.046.27-.068l.02-.004c.1-.024.2-.046.3-.067.018-.004.037-.008.055-.012l.01-.002c.11-.024.22-.045.33-.065.03-.005.06-.01.09-.015.09-.017.18-.033.27-.048.03-.005.06-.01.09-.014.12-.02.24-.038.36-.054.026-.003.053-.006.08-.009.08-.01.16-.02.24-.028.02-.002.04-.004.06-.006.12-.01.24-.017.36-.022.013-.001.025-.001.038-.002.1-.003.2-.004.3-.004h.04c.01 0 .02.001.03.001.13 0 .26.002.39.005.11.002.22.006.33.01l.03.001c.09.003.18.007.27.012l.036.002c.1.005.2.01.3.016l.038.003c.09.005.18.01.27.016l.032.002c.1.007.2.015.3.024l.034.003c.09.008.18.017.27.026l.028.003c.09.01.18.02.27.032l.022.003c.1.013.19.027.28.042l.018.003c.04.008.09.016.13.025.02.004.04.008.06.012Z"/></svg> PayPal
-                 </Button>
-                 <Button className="w-full justify-start" size="lg" disabled={isSubmitting} onClick={() => handlePayment('UPI')}>
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="mr-2 h-5 w-5 fill-current"><title>BHIM</title><path d="M12.595 1.341l-2.096.38-2.032.368-2.096.38c-3.136.568-4.192 1.492-4.192 4.31v10.32c0 2.879 1.056 3.742 4.192 4.31l2.096.38 2.032.368 2.096.38c3.199.568 4.255-1.056 4.255-3.99v-2.15l-4.255-2.21v-1.63l4.255-2.21V5.7c0-2.879-1.056-4.72-4.255-4.36zm-2.096 1.148l1.37.258c1.973.368 2.502 1.12 2.502 2.941v1.63L9.6 9.488V7.858c0-1.82 0-2.816 2.899-3.369zm1.37 13.9l1.37.258c1.973.368 2.502.69 2.502 2.503 0 .75-.064 1.12-.446 1.49-.382.368-1.056.492-2.056.129l-1.37-.258v-4.122zm-2.836-1.554l-1.37-.258c-1.001-.184-1.61-.43-1.989-.753-.38-.31-.51-.626-.51-1.306 0-1.819.529-2.571 2.5-2.94l1.37-.259v5.516z"/></svg> UPI / BHIM
-                 </Button>
+            <div className="py-4">
+                 <Tabs defaultValue="qrcode" className="w-full">
+                    <TabsList className="grid w-full grid-cols-3">
+                        <TabsTrigger value="qrcode">QR Code / UPI</TabsTrigger>
+                        <TabsTrigger value="card">Card</TabsTrigger>
+                        <TabsTrigger value="netbanking">Net Banking</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="qrcode" className="text-center mt-6">
+                        <p className="text-sm text-muted-foreground mb-4">Scan the code with any UPI app</p>
+                        <div className="flex justify-center">
+                            <Image src="https://placehold.co/200x200.png" width={200} height={200} alt="QR Code" data-ai-hint="qr code" />
+                        </div>
+                         <Button className="w-full mt-6" disabled={isSubmitting} onClick={() => handlePayment('UPI / QR Code')}>
+                           {isSubmitting ? "Processing..." : "I have paid"}
+                        </Button>
+                    </TabsContent>
+                    <TabsContent value="card" className="mt-6">
+                        <div className="space-y-4">
+                             <FormItem>
+                                <FormLabel>Card Number</FormLabel>
+                                <Input disabled placeholder="XXXX XXXX XXXX XXXX" />
+                             </FormItem>
+                             <div className="grid grid-cols-2 gap-4">
+                                <FormItem>
+                                    <FormLabel>Expiry (MM/YY)</FormLabel>
+                                    <Input disabled placeholder="MM/YY" />
+                                </FormItem>
+                                <FormItem>
+                                    <FormLabel>CVC</FormLabel>
+                                    <Input disabled placeholder="XXX" />
+                                </FormItem>
+                             </div>
+                             <Button className="w-full" disabled={isSubmitting} onClick={() => handlePayment('Credit Card')}>
+                               <CreditCard className="mr-2 h-4 w-4" /> {isSubmitting ? "Processing..." : `Pay $${(formData as any)?.amount}`}
+                             </Button>
+                        </div>
+                    </TabsContent>
+                    <TabsContent value="netbanking" className="mt-6">
+                        <div className="space-y-4">
+                            <FormItem>
+                                <FormLabel>Select Bank</FormLabel>
+                                <Select disabled>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Choose your bank" />
+                                    </SelectTrigger>
+                                </Select>
+                            </FormItem>
+                            <p className="text-xs text-muted-foreground text-center">In a real app, you'd be redirected to your bank's website.</p>
+                             <Button className="w-full" disabled={isSubmitting} onClick={() => handlePayment('Net Banking')}>
+                               <Landmark className="mr-2 h-4 w-4" /> {isSubmitting ? "Processing..." : "Proceed"}
+                             </Button>
+                        </div>
+                    </TabsContent>
+                </Tabs>
             </div>
         )}
 
         {formStep === 'confirmation' && (
-            <div className="text-center py-4">
+            <div className="text-center py-8">
                 <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                <DialogFooter>
+                <DialogFooter className="mt-4">
                     <DialogClose asChild>
                         <Button type="button" className="w-full">Done</Button>
                     </DialogClose>
