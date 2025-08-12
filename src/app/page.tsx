@@ -32,6 +32,8 @@ export default function Home(): JSX.Element {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
 
+  const [line1, line2] = content.hero.heading.split('\n');
+
   return (
     <div className="flex flex-col items-center bg-background">
       {/* Hero Section */}
@@ -61,10 +63,12 @@ export default function Home(): JSX.Element {
         </Carousel>
 
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center h-full text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight">
-            {content.hero.heading}
+          <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight leading-tight">
+            <span>{line1}</span>
+            <br />
+            <span>{line2}</span>
           </h1>
-          <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto">
+          <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto">
             {content.hero.subheading}
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">

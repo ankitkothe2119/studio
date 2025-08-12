@@ -7,8 +7,8 @@
 
 export const homePageContent = {
   hero: {
-    heading: 'Building Hope, Changing Lives',
-    subheading: 'Join us in creating meaningful change for communities in need through education, healthcare, and other empowerment programs worldwide.',
+    heading: 'ॐ सर्वे भवन्तु सुखिनः, सर्वे सन्तु निरामयाः ।\nसर्वे भद्राणि पश्यन्तु, मा कश्चित् दुःख भाग्भवेत् ॥',
+    subheading: 'Wishing all to be happy, wishing all to be free from disease. Wishing all to see goodness, and let no one suffer.',
     cta1: 'Donate Now',
     cta2: 'Read More',
   },
