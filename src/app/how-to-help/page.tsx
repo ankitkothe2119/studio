@@ -4,8 +4,8 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Heart, Users, DollarSign, Mail } from 'lucide-react';
-import Link from 'next/link';
 import { howToHelpPageContent as content } from '@/lib/content';
+import { InquiryFormDialog } from '@/components/InquiryFormDialog';
 
 /**
  * @fileoverview This is the 'How to Help' page for the Sarthi Shiksha NGO website.
@@ -30,6 +30,13 @@ export default function HowToHelpPage(): JSX.Element {
     return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
   }
   
+  const getFormType = (title: string): 'Donate' | 'Volunteer' | 'Partner' | null => {
+    if (title === 'Donate') return 'Donate';
+    if (title === 'Volunteer') return 'Volunteer';
+    if (title === 'Corporate Partnership') return 'Partner';
+    return null;
+  }
+  
   return (
     <div className="container mx-auto px-4 py-16">
       <header className="text-center mb-16">
@@ -40,6 +47,8 @@ export default function HowToHelpPage(): JSX.Element {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {content.sections.map((section, index) => {
           const Icon = icons[section.icon as SectionIcon];
+          const formType = getFormType(section.title);
+
           return (
             <Card key={index} className="flex flex-col text-center shadow-lg hover:shadow-xl transition-shadow duration-300 border-primary/10">
               <CardHeader>
@@ -50,9 +59,20 @@ export default function HowToHelpPage(): JSX.Element {
                 <CardDescription className="pt-2 min-h-[60px]">{section.description}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow flex items-end justify-center">
-                 <Button asChild className="w-full md:w-auto transition-transform duration-300 hover:scale-105">
-                   <Link href={section.link}>{section.cta}</Link>
-                 </Button>
+                 {formType ? (
+                    <InquiryFormDialog
+                        formType={formType}
+                        trigger={
+                            <Button className="w-full md:w-auto transition-transform duration-300 hover:scale-105">
+                                {section.cta}
+                            </Button>
+                        }
+                    />
+                 ) : (
+                    <Button asChild className="w-full md:w-auto transition-transform duration-300 hover:scale-105">
+                        <a href={section.link} target="_blank" rel="noopener noreferrer">{section.cta}</a>
+                    </Button>
+                 )}
               </CardContent>
             </Card>
           );
