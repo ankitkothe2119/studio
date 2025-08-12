@@ -46,7 +46,7 @@ export function Chatbot() {
             setMessages([
                 {
                     role: 'bot',
-                    text: "Hello! I'm the Sarthi Shiksha assistant. How can I help you today?"
+                    text: "Hello! I'm the Sarthi Shiksha Roshan Seva Samiti assistant. How can I help you today?"
                 }
             ]);
         }

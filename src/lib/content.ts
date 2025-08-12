@@ -23,7 +23,7 @@ export const homePageContent = {
   },
   mission: {
     title: 'Our Mission',
-    text: "At Sarthi Shiksha, we are dedicated to improving lives in underserved communities through sustainable and impactful programs. Our mission is to provide access to quality education, healthcare, and economic opportunities, empowering individuals to build a better future for themselves and their families.",
+    text: "At Sarthi Shiksha Roshan Seva Samiti, we are dedicated to improving lives in underserved communities through sustainable and impactful programs. Our mission is to provide access to quality education, healthcare, and economic opportunities, empowering individuals to build a better future for themselves and their families.",
     cta: 'Learn About Us',
   },
   focus: {
@@ -80,12 +80,12 @@ export const homePageContent = {
 
 export const aboutPageContent = {
   hero: {
-    title: 'About Hope Foundation',
+    title: 'About Sarthi Shiksha Roshan Seva Samiti',
     subtitle: 'Creating lasting change through compassion, dedication, and community partnership',
   },
   ourStory: {
     title: 'Our Story',
-    text: "Founded in 2012, Hope Foundation began as a small group of passionate individuals who witnessed the urgent need for sustainable development in their local communities. What started as a local initiative soon grew into a global movement, reaching across over 25 countries.\n\nThe founders, Dr. Sarah Mitchell and Marcus Thompson, were inspired by their experiences working in underserved communities, where they saw first-hand how targeted interventions could transform entire communities. Their shared belief is that the foundation of a thriving society is its people. For people to create a world where every person has access to basic human needs and opportunities for growth.\n\nToday, we continue to live that vision by working directly with communities to develop sustainable solutions that address the root causes of poverty and inequality. Our approach is built on respect, partnership, and the belief that lasting change comes from within communities themselves.",
+    text: "Founded in 2012, Sarthi Shiksha Roshan Seva Samiti began as a small group of passionate individuals who witnessed the urgent need for sustainable development in their local communities. What started as a local initiative soon grew into a global movement, reaching across over 25 countries.\n\nThe founders, Dr. Sarah Mitchell and Marcus Thompson, were inspired by their experiences working in underserved communities, where they saw first-hand how targeted interventions could transform entire communities. Their shared belief is that the foundation of a thriving society is its people. For people to create a world where every person has access to basic human needs and opportunities for growth.\n\nToday, we continue to live that vision by working directly with communities to develop sustainable solutions that address the root causes of poverty and inequality. Our approach is built on respect, partnership, and the belief that lasting change comes from within communities themselves.",
   },
   missionVisionValues: {
     title: 'Our Mission, Vision, and Values',
@@ -123,7 +123,7 @@ export const aboutPageContent = {
     title: 'Our Journey',
     subtitle: 'Key milestones in our mission to create positive change',
     milestones: [
-        { year: '2010', title: 'Foundation Established', description: 'Hope Foundation is born with a mission to create sustainable change in underserved communities.'},
+        { year: '2010', title: 'Foundation Established', description: 'Sarthi Shiksha Roshan Seva Samiti is born with a mission to create sustainable change in underserved communities.'},
         { year: '2015', title: 'Global Expansion', description: 'Programs expanded to 10 new countries, reaching over 10,000 direct beneficiaries.'},
         { year: '2020', title: 'Major Milestone', description: 'Reached 25,000 beneficiaries through education, health, and economic development programs.'},
         { year: '2024', title: '50,000+ Lives Touched', description: 'Continuing to build on our success, with projects reaching over 50,000 lives annually.'},
@@ -312,4 +312,3 @@ export const contactPageContent = {
     title: 'Our Location',
   }
 };
-

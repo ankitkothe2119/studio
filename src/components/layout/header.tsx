@@ -65,7 +65,7 @@ export function Header(): JSX.Element {
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2" passHref>
           <div className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors">
-            <Image src="/logo.png" alt="Sarthi Shiksha Logo" width={50} height={50} className="rounded-full"/>
+            <Image src="/logo.png" alt="Sarthi Shiksha Roshan Seva Samiti Logo" width={50} height={50} className="rounded-full"/>
             <span className="text-xl font-headline font-bold tracking-tight text-foreground">
               Sarthi Shiksha
             </span>

@@ -1,6 +1,6 @@
-# Sarthi Shiksha - Backend Documentation
+# Sarthi Shiksha Roshan Seva Samiti - Backend Documentation
 
-This document provides an overview of the backend architecture, data schemas, and setup instructions for the Sarthi Shiksha website. It also includes a comprehensive prompt for generating the backend functionality using a large language model.
+This document provides an overview of the backend architecture, data schemas, and setup instructions for the Sarthi Shiksha Roshan Seva Samiti website. It also includes a comprehensive prompt for generating the backend functionality using a large language model.
 
 ## 1. Backend Architecture
 
@@ -48,7 +48,7 @@ Below is a comprehensive prompt designed to instruct a capable AI coding assista
 
 ### **Prompt:**
 
-Generate the backend code for a Next.js application for an NGO called "Sarthi Shiksha". The backend will consist of Next.js Server Actions for form handling and database management, and Genkit flows for AI features. All backend code should be placed in a `src/server/` directory.
+Generate the backend code for a Next.js application for an NGO called "Sarthi Shiksha Roshan Seva Samiti". The backend will consist of Next.js Server Actions for form handling and database management, and Genkit flows for AI features. All backend code should be placed in a `src/server/` directory.
 
 **Part 1: Database Setup**
 
@@ -79,6 +79,6 @@ Create a Genkit flow file at `src/server/ai/flows/chat-flow.ts`.
 2.  Import the global `ai` object from `src/server/ai/genkit.ts`.
 3.  Define Zod schemas for the flow's input (`ChatWithWebsiteInputSchema`) with `query: string` and `context: string`, and output (`ChatWithWebsiteOutputSchema`) with `response: string`.
 4.  Create and export an `async` wrapper function `chatWithWebsite` that calls the Genkit flow.
-5.  Define a Genkit prompt named `chatWithWebsitePrompt` that instructs the model to act as a friendly chatbot for "Sarthi Shiksha", using the provided `context` to answer the user's `query`. It should not invent information.
+5.  Define a Genkit prompt named `chatWithWebsitePrompt` that instructs the model to act as a friendly chatbot for "Sarthi Shiksha Roshan Seva Samiti", using the provided `context` to answer the user's `query`. It should not invent information.
 6.  Define a Genkit flow named `chatWithWebsiteFlow` that takes the input, calls the prompt, and returns the structured output.
 ***

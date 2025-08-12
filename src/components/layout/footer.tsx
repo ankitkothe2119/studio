@@ -17,7 +17,7 @@ export function Footer(): JSX.Element {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
                 <Link href="/" className="flex items-center gap-2 mb-4">
-                    <Image src="/logo.png" alt="Sarthi Shiksha Logo" width={50} height={50} className="rounded-full" />
+                    <Image src="/logo.png" alt="Sarthi Shiksha Roshan Seva Samiti Logo" width={50} height={50} className="rounded-full" />
                     <span className="text-xl font-headline font-bold tracking-tight text-white">
                         Sarthi Shiksha
                     </span>
@@ -58,7 +58,7 @@ export function Footer(): JSX.Element {
             </div>
         </div>
         <div className="border-t border-gray-800 mt-8 pt-6 text-center text-sm">
-           <p>&copy; {new Date().getFullYear()} Sarthi Shiksha. All Rights Reserved. | <Link href="#" className="hover:text-primary">Privacy Policy</Link> | <Link href="#" className="hover:text-primary">Terms of Use</Link></p>
+           <p>&copy; {new Date().getFullYear()} Sarthi Shiksha Roshan Seva Samiti. All Rights Reserved. | <Link href="#" className="hover:text-primary">Privacy Policy</Link> | <Link href="#" className="hover:text-primary">Terms of Use</Link></p>
         </div>
       </div>
     </footer>
