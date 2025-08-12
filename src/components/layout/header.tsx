@@ -64,12 +64,14 @@ export function Header(): JSX.Element {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 group" passHref>
-          <div className="flex items-center gap-3 text-primary group-hover:text-primary/80 transition-colors">
+        <Link href="/" className="flex items-center gap-2" passHref>
+          <div className="flex items-center gap-3 text-primary transition-colors">
             <Image src="/logo.png" alt="Sarthi Shiksha Roshan Seva Samiti Logo" width={50} height={50} className="rounded-full"/>
-             <div className="text-xl font-headline font-bold tracking-tight text-foreground">
-                <span className="hidden md:inline">Sarthi Shiksha Roshan Seva Samiti</span>
-                <span className="inline md:hidden">Sarthi Shiksha</span>
+             <div className="text-xl font-headline font-bold tracking-tight text-foreground relative group">
+                {/* Full name, visible on medium screens and up, or on hover on small screens */}
+                <span className="hidden md:inline group-hover:inline transition-opacity duration-300">Sarthi Shiksha Roshan Seva Samiti</span>
+                {/* Short name, visible on small screens, hidden on hover */}
+                <span className="inline md:hidden group-hover:hidden transition-opacity duration-300">Sarthi Shiksha</span>
             </div>
           </div>
         </Link>
