@@ -28,7 +28,7 @@ export default function Home(): JSX.Element {
       {/* Hero Section */}
       <section className="relative w-full h-[60vh] md:h-[80vh] text-white">
         <Image
-          src="https://placehold.co/1600x900.png"
+          src="https://images.unsplash.com/photo-1588954521402-729fccacba74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBlZHVjYXRpb258ZW58MHx8fHwxNzU0OTk3MjY1fDA&ixlib=rb-4.1.0&q=80&w=1080"
           alt="Community members"
           data-ai-hint="community education"
           fill
@@ -80,7 +80,7 @@ export default function Home(): JSX.Element {
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
                 <Image
-                    src="https://placehold.co/600x400.png"
+                    src="https://images.unsplash.com/photo-1722252799088-4781aabc3d0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBnYXRoZXJpbmd8ZW58MHx8fHwxNzU0OTk3MjY1fDA&ixlib=rb-4.1.0&q=80&w=1080"
                     alt="Community gathering"
                     data-ai-hint="community gathering"
                     width={600}

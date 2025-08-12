@@ -51,19 +51,19 @@ export const homePageContent = {
     subtitle: 'See how we are making a difference in the lives of many.',
     items: [
       {
-        image: { src: 'https://placehold.co/600x400.png', hint: 'school building' },
+        image: { src: 'https://images.unsplash.com/photo-1584750153892-38414eb8e76a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzY2hvb2wlMjBidWlsZGluZ3xlbnwwfHx8fDE3NTQ5OTcyNjV8MA&ixlib=rb-4.1.0&q=80&w=1080', hint: 'school building' },
         title: 'School Construction in Kenya',
         description: 'Building a new primary school to provide a safe learning environment for over 300 children.',
         link: '#',
       },
       {
-        image: { src: 'https://placehold.co/600x400.png', hint: 'clean water' },
+        image: { src: 'https://images.unsplash.com/photo-1606214554814-e8a9f97bdbb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y2xlYW4lMjB3YXRlcnxlbnwwfHx8fDE3NTQ5OTcyNjZ8MA&ixlib=rb-4.1.0&q=80&w=1080', hint: 'clean water' },
         title: 'Clean Water Initiative',
         description: 'Installing water purification systems to provide access to clean and safe drinking water for a community of 5,000 people.',
         link: '#',
       },
       {
-        image: { src: 'https://placehold.co/600x400.png', hint: 'medical clinic' },
+        image: { src: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwY2xpbmljfGVufDB8fHx8MTc1NDk5NzI2NXww&ixlib=rb-4.1.0&q=80&w=1080', hint: 'medical clinic' },
         title: 'Mobile Health Clinic',
         description: 'Launching a mobile clinic to deliver essential healthcare services to remote and underserved populations.',
         link: '#',
