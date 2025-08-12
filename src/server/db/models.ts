@@ -53,6 +53,13 @@ const teamMemberSchema = new Schema({
     category: { type: String, enum: ['Founder', 'Team Member'], required: true },
 });
 
+// Schema for Admins
+const adminSchema = new Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+}, { timestamps: true });
+
 
 // Create models from schemas if they don't already exist
 export const Donor = mongoose.models.Donor || mongoose.model('Donor', donorSchema);
@@ -60,4 +67,4 @@ export const Volunteer = mongoose.models.Volunteer || mongoose.model('Volunteer'
 export const Partner = mongoose.models.Partner || mongoose.model('Partner', partnerSchema);
 export const Contact = mongoose.models.Contact || mongoose.model('Contact', contactSchema);
 export const TeamMember = mongoose.models.TeamMember || mongoose.model('TeamMember', teamMemberSchema);
-
+export const Admin = mongoose.models.Admin || mongoose.model('Admin', adminSchema);

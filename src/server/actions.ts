@@ -3,9 +3,10 @@
 
 import { z } from 'zod';
 import connectToDatabase from '@/server/db/mongodb';
-import { Contact, Donor, Partner, TeamMember, Volunteer } from '@/server/db/models';
+import { Contact, Donor, Partner, TeamMember, Volunteer, Admin } from '@/server/db/models';
 import { aboutPageContent } from '@/lib/content';
 import { revalidatePath } from 'next/cache';
+import bcrypt from 'bcryptjs';
 
 /**
  * @fileoverview This file contains server-side actions for the application,
@@ -188,5 +189,68 @@ export async function deleteTeamMember(id: string) {
     } catch (error) {
         console.error('Failed to delete team member:', error);
         return { success: false, message: 'Failed to delete team member.' };
+    }
+}
+
+// Admin Auth Actions
+
+const signupSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+export async function adminSignup(data: unknown) {
+    try {
+        const { name, email, password } = signupSchema.parse(data);
+        await connectToDatabase();
+
+        const existingAdmin = await Admin.findOne({ email });
+        if (existingAdmin) {
+            return { success: false, message: 'An admin with this email already exists.' };
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await Admin.create({ name, email, password: hashedPassword });
+
+        return { success: true, message: 'Admin account created successfully.' };
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            return { success: false, message: error.errors.map(e => e.message).join(', ') };
+        }
+        console.error('Signup error:', error);
+        return { success: false, message: 'An unexpected error occurred during signup.' };
+    }
+}
+
+const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string(),
+});
+
+export async function adminLogin(data: unknown) {
+    try {
+        const { email, password } = loginSchema.parse(data);
+        await connectToDatabase();
+
+        const admin = await Admin.findOne({ email });
+        if (!admin) {
+            return { success: false, message: 'Invalid email or password.' };
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, admin.password);
+        if (!isPasswordValid) {
+            return { success: false, message: 'Invalid email or password.' };
+        }
+
+        // In a real app, you would create a session/token here.
+        // For now, we just return success.
+        return { success: true, message: 'Login successful!', user: { name: admin.name, email: admin.email } };
+    } catch (error) {
+         if (error instanceof z.ZodError) {
+            return { success: false, message: error.errors.map(e => e.message).join(', ') };
+        }
+        console.error('Login error:', error);
+        return { success: false, message: 'An unexpected error occurred during login.' };
     }
 }
