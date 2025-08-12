@@ -3,12 +3,13 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Eye, Heart, Goal, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { aboutPageContent as content } from '@/lib/content';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
@@ -69,6 +70,16 @@ const teamMembers = [
         twitter: '#'
       }
     },
+];
+
+const otherTeamMembers = [
+  { name: 'Sameer Khan', role: 'Logistics Manager', avatar: 'SK' },
+  { name: 'Neha Desai', role: 'Finance Officer', avatar: 'ND' },
+  { name: 'Arjun Reddy', role: 'IT Specialist', avatar: 'AR' },
+  { name: 'Kavita Iyer', role: 'Legal Advisor', avatar: 'KI' },
+  { name: 'Rajesh Kumar', role: 'Field Officer', avatar: 'RK' },
+  { name: 'Sunita Patil', role: 'Admin Assistant', avatar: 'SP' },
+  { name: 'Mahesh Babu', role: 'Driver', avatar: 'MB' },
 ];
 
 
@@ -163,6 +174,42 @@ export default function AboutPage(): JSX.Element {
               </Card>
               ))}
           </div>
+        </section>
+
+        {/* Other Team Members Marquee/Carousel */}
+        <section className="mb-20">
+            <h2 className="text-3xl font-headline font-bold text-center mb-4">Our Valued Team Members</h2>
+            <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">The dedicated individuals who drive our mission forward every day.</p>
+            <Carousel
+                opts={{
+                    align: "start",
+                    loop: true,
+                }}
+                className="w-full max-w-6xl mx-auto"
+            >
+                <CarouselContent>
+                    {otherTeamMembers.map((member, index) => (
+                        <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/4">
+                            <div className="p-1">
+                                <Card className="pt-6">
+                                    <CardContent className="flex flex-col items-center justify-center space-y-2">
+                                        <Avatar className="w-20 h-20">
+                                            <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
+                                            <AvatarFallback className="text-xl bg-secondary text-secondary-foreground font-bold">{member.avatar}</AvatarFallback>
+                                        </Avatar>
+                                        <div className="text-center">
+                                            <p className="font-semibold text-md">{member.name}</p>
+                                            <p className="text-sm text-muted-foreground">{member.role}</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious className="hidden sm:flex"/>
+                <CarouselNext className="hidden sm:flex"/>
+            </Carousel>
         </section>
         
         {/* Our Journey Section */}
