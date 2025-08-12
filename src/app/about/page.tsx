@@ -10,6 +10,7 @@ import { Eye, Heart, Goal, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { aboutPageContent as content } from '@/lib/content';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
 
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
@@ -181,6 +182,7 @@ export default function AboutPage(): JSX.Element {
             <h2 className="text-3xl font-headline font-bold text-center mb-4">Our Valued Team Members</h2>
             <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">The dedicated individuals who drive our mission forward every day.</p>
             <Carousel
+                plugins={[ Autoplay({ delay: 5000, stopOnInteraction: true }) ]}
                 opts={{
                     align: "start",
                     loop: true,
