@@ -68,11 +68,9 @@ export function Header(): JSX.Element {
           <div className="flex items-center gap-3 text-primary transition-colors">
             <Image src="/logo.png" alt="Sarthi Shiksha Roshan Seva Samiti Logo" width={50} height={50} className="rounded-full"/>
              <div className="text-xl font-headline font-bold tracking-tight text-foreground relative group">
-                <span className="md:hidden">
-                    <span className="group-hover:hidden">Sarthi Shiksha</span>
-                    <span className="hidden group-hover:inline">Sarthi Shiksha Roshan Seva Samiti</span>
-                </span>
-                <span className="hidden md:inline">Sarthi Shiksha Roshan Seva Samiti</span>
+                <span className="md:hidden group-hover:hidden">Sarthi Shiksha</span>
+                <span className="hidden md:inline group-hover:md:hidden">Sarthi Shiksha Roshan Seva Samiti</span>
+                <span className="hidden group-hover:inline">Sarthi Shiksha Roshan Seva Samiti</span>
             </div>
           </div>
         </Link>
