@@ -108,7 +108,7 @@ async function seedTeamData() {
 
 /**
  * Fetches all team members from the database, categorized into founders and other members.
- * @returns {Promise<{founders: any[], teamMembers: any[]}>} An object containing arrays of founders and team members.
+ * @returns {Promise<{founders: any[], teamMembers: any[], allMembers: any[]}>} An object containing arrays of founders and team members.
  */
 export async function getTeamMembers() {
     try {
@@ -119,10 +119,74 @@ export async function getTeamMembers() {
         const founders = plainMembers.filter((m: any) => m.category === 'Founder');
         const teamMembers = plainMembers.filter((m: any) => m.category === 'Team Member');
 
-        return { founders, teamMembers };
+        return { founders, teamMembers, allMembers: plainMembers };
     } catch (error) {
         console.error("Failed to fetch team members:", error);
-        return { founders: [], teamMembers: [] }; // Return empty arrays on error
+        return { founders: [], teamMembers: [], allMembers: [] }; // Return empty arrays on error
     }
 }
 
+const memberSchema = z.object({
+  name: z.string().min(2),
+  role: z.string().min(2),
+  avatar: z.string().min(2).max(2),
+  description: z.string().min(10),
+  category: z.enum(['Founder', 'Team Member']),
+});
+
+/**
+ * Adds a new team member to the database.
+ * @param {any} data The team member data.
+ * @returns {Promise<{success: boolean, message: string}>} A result object.
+ */
+export async function addTeamMember(data: unknown) {
+    try {
+        const parsedData = memberSchema.parse(data);
+        await connectToDatabase();
+        await TeamMember.create(parsedData);
+        revalidatePath('/admin/team');
+        revalidatePath('/about');
+        return { success: true, message: 'Team member added successfully.' };
+    } catch (error) {
+        console.error('Failed to add team member:', error);
+        return { success: false, message: 'Failed to add team member.' };
+    }
+}
+
+/**
+ * Updates an existing team member in the database.
+ * @param {string} id The ID of the member to update.
+ * @param {any} data The new data for the team member.
+ * @returns {Promise<{success: boolean, message: string}>} A result object.
+ */
+export async function updateTeamMember(id: string, data: unknown) {
+    try {
+        const parsedData = memberSchema.parse(data);
+        await connectToDatabase();
+        await TeamMember.findByIdAndUpdate(id, parsedData);
+        revalidatePath('/admin/team');
+        revalidatePath('/about');
+        return { success: true, message: 'Team member updated successfully.' };
+    } catch (error) {
+        console.error('Failed to update team member:', error);
+        return { success: false, message: 'Failed to update team member.' };
+    }
+}
+
+/**
+ * Deletes a team member from the database.
+ * @param {string} id The ID of the member to delete.
+ * @returns {Promise<{success: boolean, message: string}>} A result object.
+ */
+export async function deleteTeamMember(id: string) {
+    try {
+        await connectToDatabase();
+        await TeamMember.findByIdAndDelete(id);
+        revalidatePath('/admin/team');
+        revalidatePath('/about');
+        return { success: true, message: 'Team member deleted successfully.' };
+    } catch (error) {
+        console.error('Failed to delete team member:', error);
+        return { success: false, message: 'Failed to delete team member.' };
+    }
+}

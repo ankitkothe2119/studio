@@ -1,4 +1,5 @@
 
+
 'use server';
 
 import React from 'react';
@@ -128,6 +129,7 @@ export default async function AboutPage(): Promise<JSX.Element> {
           </div>
 
           {/* Other Team Members Marquee */}
+          {teamMembers.length > 0 && (
           <div>
             <h3 className="text-2xl font-headline font-semibold text-center text-primary mb-8">Our Dedicated Team</h3>
              <div className="relative w-full overflow-hidden group">
@@ -149,6 +151,7 @@ export default async function AboutPage(): Promise<JSX.Element> {
                  <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-background to-transparent"></div>
              </div>
           </div>
+          )}
         </section>
         
         {/* Our Journey Section */}
@@ -185,4 +188,3 @@ export default async function AboutPage(): Promise<JSX.Element> {
     </div>
   );
 }
-
