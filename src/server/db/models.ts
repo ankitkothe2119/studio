@@ -53,11 +53,12 @@ const teamMemberSchema = new Schema({
     category: { type: String, enum: ['Founder', 'Team Member'], required: true },
 });
 
-// Schema for Admins
-const adminSchema = new Schema({
+// Unified User Schema for both Admins and Simple Users
+const userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    role: { type: String, enum: ['user', 'admin'], required: true, default: 'user' },
 }, { timestamps: true });
 
 
@@ -67,4 +68,6 @@ export const Volunteer = mongoose.models.Volunteer || mongoose.model('Volunteer'
 export const Partner = mongoose.models.Partner || mongoose.model('Partner', partnerSchema);
 export const Contact = mongoose.models.Contact || mongoose.model('Contact', contactSchema);
 export const TeamMember = mongoose.models.TeamMember || mongoose.model('TeamMember', teamMemberSchema);
-export const Admin = mongoose.models.Admin || mongoose.model('Admin', adminSchema);
+export const User = mongoose.models.User || mongoose.model('User', userSchema);
+export const Admin = mongoose.models.Admin || mongoose.model('Admin', userSchema); // Keep for compatibility if needed, but User is preferred
+

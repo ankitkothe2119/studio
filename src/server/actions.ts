@@ -3,7 +3,7 @@
 
 import { z } from 'zod';
 import connectToDatabase from '@/server/db/mongodb';
-import { Contact, Donor, Partner, TeamMember, Volunteer, Admin } from '@/server/db/models';
+import { Contact, Donor, Partner, TeamMember, Volunteer, User } from '@/server/db/models';
 import { aboutPageContent } from '@/lib/content';
 import { revalidatePath } from 'next/cache';
 import bcrypt from 'bcryptjs';
@@ -192,7 +192,7 @@ export async function deleteTeamMember(id: string) {
     }
 }
 
-// Admin Auth Actions
+// User & Admin Auth Actions
 
 const signupSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -200,20 +200,21 @@ const signupSchema = z.object({
   password: z.string().min(6, { message: 'Password must be at least 6 characters.' }),
 });
 
-export async function adminSignup(data: unknown) {
+export async function signup(data: unknown) {
     try {
         const { name, email, password } = signupSchema.parse(data);
         await connectToDatabase();
 
-        const existingAdmin = await Admin.findOne({ email });
-        if (existingAdmin) {
-            return { success: false, message: 'An admin with this email already exists.' };
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return { success: false, message: 'A user with this email already exists.' };
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        await Admin.create({ name, email, password: hashedPassword });
+        // All public signups are for 'user' role
+        await User.create({ name, email, password: hashedPassword, role: 'user' });
 
-        return { success: true, message: 'Admin account created successfully.' };
+        return { success: true, message: 'Account created successfully.' };
     } catch (error) {
         if (error instanceof z.ZodError) {
             return { success: false, message: error.errors.map(e => e.message).join(', ') };
@@ -228,24 +229,29 @@ const loginSchema = z.object({
   password: z.string().min(1, { message: 'Password is required.' }),
 });
 
-export async function adminLogin(data: unknown) {
+export async function login(data: unknown) {
     try {
         const { email, password } = loginSchema.parse(data);
         await connectToDatabase();
 
-        const admin = await Admin.findOne({ email });
-        if (!admin) {
+        const user = await User.findOne({ email });
+        if (!user) {
             return { success: false, message: 'Invalid email or password.' };
         }
 
-        const isPasswordValid = await bcrypt.compare(password, admin.password);
+        const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return { success: false, message: 'Invalid email or password.' };
         }
 
         // In a real app, you would create a session/token here.
-        // For now, we just return success.
-        return { success: true, message: 'Login successful!', user: { name: admin.name, email: admin.email } };
+        // For now, we just return success and user info.
+        const plainUser = JSON.parse(JSON.stringify(user));
+        return { 
+            success: true, 
+            message: 'Login successful!', 
+            user: { name: plainUser.name, email: plainUser.email, role: plainUser.role } 
+        };
     } catch (error) {
          if (error instanceof z.ZodError) {
             return { success: false, message: error.errors.map(e => e.message).join(', ') };

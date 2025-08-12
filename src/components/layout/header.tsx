@@ -15,7 +15,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTr
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import Image from 'next/image';
-import { AdminAuthDialog } from '../auth/AdminAuthDialog';
+import { AuthDialog } from '../auth/AuthDialog';
 
 
 const navLinks = [
@@ -70,7 +70,7 @@ export function Header(): JSX.Element {
             <Image src="/logo.png" alt="Sarthi Shiksha Roshan Seva Samiti Logo" width={50} height={50} className="rounded-full"/>
              <div className="text-xl font-headline font-bold tracking-tight text-foreground relative group">
                 <span className="md:hidden group-hover:hidden">Sarthi Shiksha</span>
-                <span className="hidden group-hover:inline">Sarthi Shiksha Roshan Seva Samiti</span>
+                <span className="hidden md:hidden group-hover:inline">Sarthi Shiksha Roshan Seva Samiti</span>
                 <span className="hidden md:inline">Sarthi Shiksha Roshan Seva Samiti</span>
             </div>
           </div>
@@ -94,11 +94,11 @@ export function Header(): JSX.Element {
                </SheetHeader>
                {renderNavLinks(true)}
                 <div className="mt-8 border-t pt-6">
-                    <AdminAuthDialog 
+                    <AuthDialog
                         trigger={
                             <Button className="w-full">
                                 <LogIn className="mr-2 h-4 w-4" />
-                                Admin Login
+                                Login / Sign Up
                             </Button>
                         }
                     />
@@ -108,11 +108,11 @@ export function Header(): JSX.Element {
         ) : (
           <div className="flex items-center gap-4">
             {renderNavLinks()}
-             <AdminAuthDialog 
+             <AuthDialog
                 trigger={
                     <Button variant="outline">
                         <LogIn className="mr-2 h-4 w-4" />
-                        Admin Login
+                        Login / Sign Up
                     </Button>
                 }
             />

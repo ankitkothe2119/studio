@@ -35,6 +35,7 @@ interface AuthDialogProps {
 
 export function AuthDialog({ trigger }: AuthDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('login');
   const { toast } = useToast();
 
   const loginForm = useForm<LoginFormData>({
@@ -52,7 +53,8 @@ export function AuthDialog({ trigger }: AuthDialogProps) {
     if (result.success) {
       toast({ title: 'Login Successful', description: `Welcome back, ${result.user?.name}!` });
       setIsOpen(false);
-      // Here you would typically set a session cookie or update global state
+      // In a real app, you would set a session cookie or update global state here.
+      // e.g., router.refresh() to update server components with user state.
     } else {
       toast({ title: 'Login Failed', description: result.message, variant: 'destructive' });
     }
@@ -62,9 +64,8 @@ export function AuthDialog({ trigger }: AuthDialogProps) {
     const result = await signup(values);
     if (result.success) {
       toast({ title: 'Signup Successful', description: 'Your account has been created. Please log in.' });
-       // Switch to login tab after successful signup
-       // This requires a way to control the Tabs component's value from here.
-       // For simplicity, we'll just show a toast. A better UX would be to switch tabs.
+      signupForm.reset();
+      setActiveTab('login'); // Switch to login tab
     } else {
       toast({ title: 'Signup Failed', description: result.message, variant: 'destructive' });
     }
@@ -82,7 +83,7 @@ export function AuthDialog({ trigger }: AuthDialogProps) {
             Log in to your account or sign up to get involved.
           </DialogDescription>
         </DialogHeader>
-        <Tabs defaultValue="login" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Login</TabsTrigger>
             <TabsTrigger value="signup">Sign Up</TabsTrigger>
