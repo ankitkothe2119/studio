@@ -13,8 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { handleContactForm } from '@/lib/actions';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { CreditCard, CheckCircle, Landmark } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { CreditCard, CheckCircle, ShieldCheck, Zap } from 'lucide-react';
 
 type FormType = 'Donate' | 'Volunteer' | 'Partner';
 type FormStep = 'form' | 'payment' | 'confirmation';
@@ -109,17 +108,19 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
     }
   }
 
-  async function handlePayment(paymentMethod: string) {
+  async function handlePayment() {
     if (!formData) return;
     setIsSubmitting(true);
 
-    console.log(`Processing ${paymentMethod} payment for:`, formData);
+    // Simulate API call to Razorpay/server
+    await new Promise(resolve => setTimeout(resolve, 1500)); 
+
     const result = await handleContactForm(formData);
     
     if (result.success) {
       setFormStep('confirmation');
     } else {
-      toast({ title: 'Error', description: 'Something went wrong with the submission. Please try again.', variant: 'destructive' });
+      toast({ title: 'Payment Error', description: 'Something went wrong with the submission. Please try again.', variant: 'destructive' });
       setFormStep('form');
     }
     setIsSubmitting(false);
@@ -137,7 +138,7 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
               <FormItem><FormLabel>Email Address</FormLabel><FormControl><Input placeholder="john.doe@example.com" {...field} /></FormControl><FormMessage /></FormItem>
             )} />
             <FormField control={form.control} name="amount" render={({ field }) => (
-              <FormItem><FormLabel>Donation Amount ($)</FormLabel><FormControl><Input type="number" placeholder="50" {...field} onChange={e => field.onChange(e.target.value)} /></FormControl><FormMessage /></FormItem>
+              <FormItem><FormLabel>Donation Amount (₹)</FormLabel><FormControl><Input type="number" placeholder="500" {...field} onChange={e => field.onChange(e.target.value)} /></FormControl><FormMessage /></FormItem>
             )} />
              <FormField control={form.control} name="message" render={({ field }) => (
               <FormItem><FormLabel>Message (Optional)</FormLabel><FormControl><Textarea placeholder="A personal message to our team..." {...field} /></FormControl><FormMessage /></FormItem>
@@ -154,7 +155,7 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
               <FormItem><FormLabel>Email Address</FormLabel><FormControl><Input placeholder="jane.smith@example.com" {...field} /></FormControl><FormMessage /></FormItem>
             )} />
             <FormField control={form.control} name="phone" render={({ field }) => (
-              <FormItem><FormLabel>Phone Number</FormLabel><FormControl><Input placeholder="+1 234 567 890" {...field} /></FormControl><FormMessage /></FormItem>
+              <FormItem><FormLabel>Phone Number</FormLabel><FormControl><Input placeholder="+91 98765 43210" {...field} /></FormControl><FormMessage /></FormItem>
             )} />
             <FormField control={form.control} name="interest" render={({ field }) => (
                <FormItem>
@@ -194,7 +195,7 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
               <FormItem><FormLabel>Work Email</FormLabel><FormControl><Input placeholder="alex.chen@globalcorp.com" {...field} /></FormControl><FormMessage /></FormItem>
             )} />
             <FormField control={form.control} name="phone" render={({ field }) => (
-              <FormItem><FormLabel>Work Phone</FormLabel><FormControl><Input placeholder="+1 234 567 890" {...field} /></FormControl><FormMessage /></FormItem>
+              <FormItem><FormLabel>Work Phone</FormLabel><FormControl><Input placeholder="+91 98765 43210" {...field} /></FormControl><FormMessage /></FormItem>
             )} />
             <FormField control={form.control} name="message" render={({ field }) => (
                 <FormItem><FormLabel>Partnership Proposal</FormLabel><FormControl><Textarea placeholder="Describe how your company would like to partner with us..." className="min-h-[120px]" {...field} /></FormControl><FormMessage /></FormItem>
@@ -216,7 +217,7 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
 
   const getDialogDescription = () => {
      if (formType === 'Donate') {
-        if (formStep === 'payment') return `You are donating $${(formData as any)?.amount}. Please choose your preferred payment method.`;
+        if (formStep === 'payment') return `You are donating ₹${(formData as any)?.amount}. This is a secure Razorpay checkout simulation.`;
         if (formStep === 'confirmation') return 'Your donation has been processed successfully. Thank you for your generosity!';
     }
     return 'Please fill out the form below. We appreciate your interest and support.';
@@ -246,67 +247,31 @@ export function InquiryFormDialog({ formType, trigger }: InquiryFormDialogProps)
         )}
 
         {formStep === 'payment' && (
-            <div className="py-4">
-                 <Tabs defaultValue="qrcode" className="w-full">
-                    <TabsList className="grid w-full grid-cols-3">
-                        <TabsTrigger value="qrcode">QR Code / UPI</TabsTrigger>
-                        <TabsTrigger value="card">Card</TabsTrigger>
-                        <TabsTrigger value="netbanking">Net Banking</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="qrcode" className="text-center mt-6">
-                        <p className="text-sm text-muted-foreground mb-4">Scan the code with any UPI app</p>
-                        <div className="flex justify-center">
-                            <Image src="https://placehold.co/200x200.png" width={200} height={200} alt="QR Code" data-ai-hint="qr code" />
-                        </div>
-                         <Button className="w-full mt-6" disabled={isSubmitting} onClick={() => handlePayment('UPI / QR Code')}>
-                           {isSubmitting ? "Processing..." : "I have paid"}
-                        </Button>
-                    </TabsContent>
-                    <TabsContent value="card" className="mt-6">
-                        <div className="space-y-4">
-                             <FormItem>
-                                <FormLabel>Card Number</FormLabel>
-                                <Input disabled placeholder="XXXX XXXX XXXX XXXX" />
-                             </FormItem>
-                             <div className="grid grid-cols-2 gap-4">
-                                <FormItem>
-                                    <FormLabel>Expiry (MM/YY)</FormLabel>
-                                    <Input disabled placeholder="MM/YY" />
-                                </FormItem>
-                                <FormItem>
-                                    <FormLabel>CVC</FormLabel>
-                                    <Input disabled placeholder="XXX" />
-                                </FormItem>
-                             </div>
-                             <Button className="w-full" disabled={isSubmitting} onClick={() => handlePayment('Credit Card')}>
-                               <CreditCard className="mr-2 h-4 w-4" /> {isSubmitting ? "Processing..." : `Pay $${(formData as any)?.amount}`}
-                             </Button>
-                        </div>
-                    </TabsContent>
-                    <TabsContent value="netbanking" className="mt-6">
-                        <div className="space-y-4">
-                            <FormItem>
-                                <FormLabel>Select Bank</FormLabel>
-                                <Select disabled>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Choose your bank" />
-                                    </SelectTrigger>
-                                </Select>
-                            </FormItem>
-                            <p className="text-xs text-muted-foreground text-center">In a real app, you'd be redirected to your bank's website.</p>
-                             <Button className="w-full" disabled={isSubmitting} onClick={() => handlePayment('Net Banking')}>
-                               <Landmark className="mr-2 h-4 w-4" /> {isSubmitting ? "Processing..." : "Proceed"}
-                             </Button>
-                        </div>
-                    </TabsContent>
-                </Tabs>
+            <div className="py-4 space-y-6">
+                <div className="rounded-lg border bg-slate-50 p-4 text-center">
+                    <p className="text-sm text-slate-600">Total Donation Amount</p>
+                    <p className="text-4xl font-bold text-slate-900">₹{(formData as any)?.amount}</p>
+                </div>
+                 <div className="space-y-4">
+                     <Button className="w-full h-12 bg-[#528FF0] hover:bg-[#528FF0]/90 text-white font-bold" disabled={isSubmitting} onClick={handlePayment}>
+                        <CreditCard className="mr-2 h-5 w-5" /> {isSubmitting ? "Processing..." : `Pay Securely`}
+                     </Button>
+                     <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
+                        <ShieldCheck className="h-4 w-4" />
+                        <span>Secured by</span>
+                        <Zap className="h-4 w-4 fill-orange-400 text-orange-400"/>
+                        <span className="font-bold">Razorpay</span>
+                     </div>
+                </div>
             </div>
         )}
 
         {formStep === 'confirmation' && (
             <div className="text-center py-8">
                 <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                <DialogFooter className="mt-4">
+                <h3 className="text-xl font-semibold mb-2">Payment Successful!</h3>
+                <p className="text-muted-foreground">A confirmation has been sent to {(formData as any)?.email}.</p>
+                <DialogFooter className="mt-6">
                     <DialogClose asChild>
                         <Button type="button" className="w-full">Done</Button>
                     </DialogClose>
