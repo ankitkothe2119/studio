@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -7,6 +8,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight, GraduationCap, HeartPulse, Building } from 'lucide-react';
 import Link from 'next/link';
 import { homePageContent as content } from '@/lib/content';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
 
 
 type FocusIcon = 'GraduationCap' | 'HeartPulse' | 'Building';
@@ -16,6 +19,12 @@ const icons: { [key in FocusIcon]: React.ElementType } = {
   Building,
 };
 
+const heroImages = [
+    { src: 'https://images.unsplash.com/photo-1588954521402-729fccacba74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBlZHVjYXRpb258ZW58MHx8fHwxNzU0OTk3MjY1fDA&ixlib=rb-4.1.0&q=80&w=1080', hint: 'community education' },
+    { src: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaGFyaXR5fGVufDB8fHx8MTc1NTA1ODQ4MXww&ixlib=rb-4.1.0&q=80&w=1080', hint: 'hands holding grain' },
+    { src: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxJbmRpYXxlbnwwfHx8fDE3NTUwNTg1MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080', hint: 'Taj Mahal' },
+    { src: 'https://images.unsplash.com/photo-1459183885421-5cc68f6b8e84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx2b2x1bnRlZXJzfGVufDB8fHx8MTc1NTA1ODU2Nnww&ixlib=rb-4.1.0&q=80&w=1080', hint: 'volunteers planting tree' },
+];
 
 export default function Home(): JSX.Element {
   
@@ -27,15 +36,31 @@ export default function Home(): JSX.Element {
     <div className="flex flex-col items-center bg-background">
       {/* Hero Section */}
       <section className="relative w-full h-[60vh] md:h-[80vh] text-white">
-        <Image
-          src="https://images.unsplash.com/photo-1588954521402-729fccacba74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBlZHVjYXRpb258ZW58MHx8fHwxNzU0OTk3MjY1fDA&ixlib=rb-4.1.0&q=80&w=1080"
-          alt="Community members"
-          data-ai-hint="community education"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+        <Carousel
+            plugins={[ Autoplay({ delay: 5000, stopOnInteraction: true }) ]}
+            className="w-full h-full"
+            opts={{ loop: true }}
+        >
+            <CarouselContent>
+                {heroImages.map((image, index) => (
+                    <CarouselItem key={index}>
+                         <div className="relative w-full h-[60vh] md:h-[80vh]">
+                            <Image
+                                src={image.src}
+                                alt="Community members"
+                                data-ai-hint={image.hint}
+                                fill
+                                className="object-cover"
+                                priority={index === 0}
+                            />
+                             <div className="absolute inset-0 bg-black/60" />
+                         </div>
+                    </CarouselItem>
+                ))}
+            </CarouselContent>
+        </Carousel>
+
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center h-full text-center px-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight">
             {content.hero.heading}
           </h1>
