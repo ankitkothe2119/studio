@@ -26,7 +26,7 @@ export async function chatWithWebsite(input: ChatWithWebsiteInput): Promise<Chat
     return chatWithWebsiteFlow(input);
 }
 
-const chatPrompt = ai.definePrompt({
+const chatWithWebsitePrompt = ai.definePrompt({
     name: 'chatWithWebsitePrompt',
     input: { schema: ChatWithWebsiteInputSchema },
     output: { schema: ChatWithWebsiteOutputSchema },
@@ -54,7 +54,10 @@ const chatWithWebsiteFlow = ai.defineFlow(
         outputSchema: ChatWithWebsiteOutputSchema,
     },
     async (input) => {
-        const { output } = await chatPrompt(input);
-        return output!;
+        const { output } = await chatWithWebsitePrompt(input);
+        if (!output) {
+          throw new Error("The AI model did not return a valid response.");
+        }
+        return output;
     }
 );
