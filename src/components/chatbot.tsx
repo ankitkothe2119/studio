@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { MessageSquare, X, Send, Bot, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { chatWithWebsite } from '@/ai/flows/chat-flow';
+import { chatWithWebsite } from '@/server/ai/flows/chat-flow';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { usePathname } from 'next/navigation';
 import { 

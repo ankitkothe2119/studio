@@ -6,13 +6,13 @@ This document provides an overview of the backend architecture, data schemas, an
 
 The backend is built using a combination of Next.js Server Actions and Google's Genkit framework for AI-powered features.
 
--   **Next.js Server Actions (`src/lib/actions.ts`)**: Handles all form submissions from the website. It receives data from the client, validates it using Zod, and processes it. In a production environment, this is where you would integrate with a database (like Firestore) or an email service.
+-   **Next.js Server Actions (`src/server/actions.ts`)**: Handles all form submissions from the website. It receives data from the client, validates it using Zod, and processes it. In a production environment, this is where you would integrate with a database (like Firestore) or an email service.
 
--   **Genkit (`src/ai/flows/`)**: Powers the AI features of the website.
+-   **Genkit (`src/server/ai/flows/`)**: Powers the AI features of the website.
     -   `chat-flow.ts`: Implements a chatbot that uses a generative model to answer user questions based on the content of the current webpage.
     -   `genkit.ts`: Configures the Genkit instance and specifies the AI model to be used.
 
--   **Dev Server (`src/ai/dev.ts`)**: The entry point for running the Genkit development server, which makes the AI flows available for local testing.
+-   **Dev Server (`src/server/ai/dev.ts`)**: The entry point for running the Genkit development server, which makes the AI flows available for local testing.
 
 ## 2. Data Schemas
 
@@ -82,7 +82,7 @@ Generate the backend code for a Next.js application for an NGO called "Sarthi Sh
 
 **Part 1: Next.js Server Action for Form Submissions**
 
-Create a single server action file at `src/lib/actions.ts`. This file must handle submissions from four different forms: a general contact form, a donation form, a volunteer form, and a corporate partnership form.
+Create a single server action file at `src/server/actions.ts`. This file must handle submissions from four different forms: a general contact form, a donation form, a volunteer form, and a corporate partnership form.
 
 1.  **Create a single exported function `handleContactForm(formData: any)`**.
 2.  Use the `zod` library to define schemas for validating the incoming `formData`. Create a discriminated union to handle the different form types.
@@ -118,10 +118,10 @@ Create a single server action file at `src/lib/actions.ts`. This file must handl
 
 **Part 2: Genkit AI Flow for a Website Chatbot**
 
-Create a Genkit flow file at `src/ai/flows/chat-flow.ts` that provides a chatbot to answer questions about the NGO based on the current page's content.
+Create a Genkit flow file at `src/server/ai/flows/chat-flow.ts` that provides a chatbot to answer questions about the NGO based on the current page's content.
 
 1.  The file must start with the `'use server';` directive.
-2.  Import the global `ai` object from `src/ai/genkit.ts`.
+2.  Import the global `ai` object from `src/server/ai/genkit.ts`.
 3.  Define a Zod schema for the flow's input, `ChatWithWebsiteInputSchema`, containing:
     -   `query`: `string`, described as "The user's question."
     -   `context`: `string`, described as "A JSON string containing the content of the current webpage."

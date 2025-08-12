@@ -12,7 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import { handleContactForm } from '@/lib/actions';
+import { handleContactForm } from '@/server/actions';
 import { contactPageContent as content } from '@/lib/content';
 
 /**

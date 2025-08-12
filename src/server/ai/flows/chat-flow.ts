@@ -7,7 +7,7 @@
  * - ChatWithWebsiteOutput - The return type for the chatWithWebsite function.
  */
 
-import { ai } from '@/ai/genkit';
+import { ai } from '@/server/ai/genkit';
 import { z } from 'genkit';
 
 const ChatWithWebsiteInputSchema = z.object({
