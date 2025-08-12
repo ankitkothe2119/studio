@@ -46,7 +46,7 @@ export default function Home(): JSX.Element {
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground transition-transform duration-300 hover:scale-105">
               <Link href="/how-to-help">{content.hero.cta1}</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary transition-colors duration-300">
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105">
               <Link href="/about">{content.hero.cta2}</Link>
             </Button>
           </div>
@@ -74,11 +74,11 @@ export default function Home(): JSX.Element {
             <div>
                 <h2 className="text-3xl font-headline font-bold text-foreground">{content.mission.title}</h2>
                 <p className="mt-4 text-foreground/70 leading-relaxed">{content.mission.text}</p>
-                 <Button asChild className="mt-6">
+                 <Button asChild className="mt-6 transition-transform duration-300 hover:scale-105">
                    <Link href="/about">{content.mission.cta}</Link>
                  </Button>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
+            <div className="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
                 <Image
                     src="https://placehold.co/600x400.png"
                     alt="Community gathering"
@@ -99,7 +99,7 @@ export default function Home(): JSX.Element {
             {content.focus.areas.map((area, index) => {
               const Icon = icons[area.icon as FocusIcon];
               return (
-                <Card key={index} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 border-primary/10 bg-card p-6">
+                <Card key={index} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-primary/10 bg-card p-6">
                     <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit mb-4">
                       <Icon className="h-8 w-8 text-primary" />
                     </div>
@@ -120,7 +120,7 @@ export default function Home(): JSX.Element {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {content.projects.items.map((project, index) => (
-                <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                     <Image 
                         src={project.image.src} 
                         alt={project.title}
@@ -147,10 +147,10 @@ export default function Home(): JSX.Element {
            <h2 className="text-3xl font-headline font-bold">{content.ctaSection.title}</h2>
            <p className="mt-4 max-w-3xl mx-auto leading-relaxed">{content.ctaSection.text}</p>
            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-gray-200">
+            <Button asChild size="lg" className="bg-white text-primary hover:bg-gray-200 transition-transform duration-300 hover:scale-105">
              <Link href="/how-to-help">{content.ctaSection.button1}</Link>
            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105">
              <Link href="/how-to-help">{content.ctaSection.button2}</Link>
            </Button>
            </div>

@@ -55,7 +55,7 @@ export default function ProjectsPage(): JSX.Element {
                     variant={activeFilter === filter ? 'default' : 'outline'}
                     onClick={() => setActiveFilter(filter)}
                     className={cn(
-                        "rounded-full transition-colors duration-300",
+                        "rounded-full transition-all duration-300 hover:scale-105",
                         activeFilter === filter ? 'bg-primary text-primary-foreground' : 'text-foreground/70 border-foreground/20'
                     )}
                 >
@@ -66,7 +66,7 @@ export default function ProjectsPage(): JSX.Element {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {filteredProjects.map((project, index) => (
-            <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col border-0 rounded-lg">
+            <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col border-0 rounded-lg">
               <div className="relative h-60 w-full">
                 <Image
                   src={project.image.src}
@@ -101,7 +101,7 @@ export default function ProjectsPage(): JSX.Element {
           <p className="text-lg text-foreground/70 mb-12 max-w-2xl mx-auto">{content.projectImpact.subtitle}</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {content.projectImpact.stats.map((stat, index) => (
-              <div key={index} className="bg-background p-6 rounded-lg shadow-md">
+              <div key={index} className="bg-background p-6 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
                 <p className="text-4xl font-bold text-primary">{stat.number}</p>
                 <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
               </div>
@@ -115,10 +115,10 @@ export default function ProjectsPage(): JSX.Element {
            <h2 className="text-3xl font-headline font-bold">{content.cta.title}</h2>
            <p className="mt-4 max-w-3xl mx-auto leading-relaxed">{content.cta.subtitle}</p>
            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="bg-background text-primary hover:bg-background/90">
+            <Button asChild size="lg" className="bg-background text-primary hover:bg-background/90 transition-transform duration-300 hover:scale-105">
              <Link href="/how-to-help">{content.cta.button1}</Link>
            </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all duration-300 hover:scale-105">
              <Link href="/contact">{content.cta.button2}</Link>
            </Button>
            </div>

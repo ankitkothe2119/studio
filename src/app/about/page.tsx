@@ -74,7 +74,7 @@ export default async function AboutPage(): Promise<JSX.Element> {
                     <h2 className="text-3xl font-headline font-semibold text-primary">{content.ourStory.title}</h2>
                     <p className="mt-4 text-foreground/80 leading-relaxed whitespace-pre-line">{content.ourStory.text}</p>
                 </div>
-                 <div className="h-80 md:h-full w-full rounded-lg overflow-hidden shadow-lg">
+                 <div className="h-80 md:h-full w-full rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
                     <Image
                         src="https://placehold.co/600x400.png"
                         alt="Team meeting"
@@ -93,7 +93,7 @@ export default async function AboutPage(): Promise<JSX.Element> {
             {content.missionVisionValues.items.map((value, index) => {
               const Icon = icons[value.icon as ValueIcon];
               return (
-                <div key={index} className="text-center p-6 bg-background rounded-lg shadow-md">
+                <div key={index} className="text-center p-6 bg-background rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                   <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit mb-4">
                     <Icon className="h-8 w-8 text-primary" />
                   </div>
@@ -115,7 +115,7 @@ export default async function AboutPage(): Promise<JSX.Element> {
             <h3 className="text-2xl font-headline font-semibold text-center text-primary mb-8">Our Founders</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 max-w-4xl mx-auto">
                 {founders.map((member, index) => (
-                <Card key={index} className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border-0">
+                <Card key={index} className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0">
                     <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
                     <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
                     <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
@@ -160,7 +160,7 @@ export default async function AboutPage(): Promise<JSX.Element> {
             <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">{content.journey.subtitle}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 {content.journey.milestones.map((milestone, index) => (
-                    <div key={index} className="text-center p-6 bg-secondary/30 rounded-lg shadow-sm">
+                    <div key={index} className="text-center p-6 bg-secondary/30 rounded-lg shadow-sm transition-transform duration-300 hover:scale-105 hover:shadow-md">
                         <p className="text-2xl font-bold text-primary mb-2">{milestone.year}</p>
                         <h3 className="font-headline font-semibold mb-2">{milestone.title}</h3>
                         <p className="text-sm text-foreground/70">{milestone.description}</p>
@@ -176,10 +176,10 @@ export default async function AboutPage(): Promise<JSX.Element> {
            <h2 className="text-3xl font-headline font-bold">{content.cta.title}</h2>
            <p className="mt-4 max-w-3xl mx-auto leading-relaxed">{content.cta.text}</p>
            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="bg-background text-primary hover:bg-background/90">
+            <Button asChild size="lg" className="bg-background text-primary hover:bg-background/90 transition-transform duration-300 hover:scale-105">
              <Link href="/how-to-help">{content.cta.button1}</Link>
            </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all duration-300 hover:scale-105">
              <Link href="/contact">{content.cta.button2}</Link>
            </Button>
            </div>

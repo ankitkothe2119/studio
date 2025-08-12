@@ -50,7 +50,7 @@ export default function HowToHelpPage(): JSX.Element {
           const formType = getFormType(section.title);
 
           return (
-            <Card key={index} className="flex flex-col text-center shadow-lg hover:shadow-xl transition-shadow duration-300 border-primary/10">
+            <Card key={index} className="flex flex-col text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-primary/10">
               <CardHeader>
                 <div className="mx-auto bg-primary/20 p-4 rounded-full w-fit mb-4">
                   <Icon className="h-8 w-8 text-primary" />

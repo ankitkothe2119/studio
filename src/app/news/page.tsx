@@ -32,7 +32,7 @@ export default function NewsPage(): JSX.Element {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {content.articles.map((article, index) => (
-          <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col border-primary/10">
+          <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col border-primary/10">
             <div className="relative h-52 w-full">
               <Image
                 src={article.image.src}
