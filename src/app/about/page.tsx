@@ -1,4 +1,4 @@
-'use client';
+'use server';
 
 import React from 'react';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Eye, Heart, Goal } from 'lucide-react';
 import Link from 'next/link';
 import { aboutPageContent as content } from '@/lib/content';
+import { getTeamMembers } from '@/server/actions';
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
 const icons: { [key in ValueIcon]: React.ElementType } = {
@@ -16,12 +17,9 @@ const icons: { [key in ValueIcon]: React.ElementType } = {
   Goal,
 };
 
-export default function AboutPage(): JSX.Element {
+export default async function AboutPage(): Promise<JSX.Element> {
+  const teamMembers = await getTeamMembers();
 
-  if (!content) {
-    return <div className="flex justify-center items-center h-screen"><p>Loading...</p></div>;
-  }
-  
   return (
     <div className="bg-background">
       {/* Hero Section */}
@@ -88,7 +86,7 @@ export default function AboutPage(): JSX.Element {
           <h2 className="text-3xl font-headline font-bold text-center mb-4">{content.team.title}</h2>
           <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">{content.team.subtitle}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-            {content.team.members.map((member, index) => (
+            {teamMembers.map((member, index) => (
               <Card key={index} className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border-0">
                 <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
                   <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
