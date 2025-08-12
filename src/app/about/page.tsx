@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Eye, Heart, Goal, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { aboutPageContent as content } from '@/lib/content';
-import { cn } from '@/lib/utils';
 
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
@@ -19,53 +18,57 @@ const icons: { [key in ValueIcon]: React.ElementType } = {
   Goal,
 };
 
-// CSS for the marquee effect
-const marqueeStyles = `
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
-}
-.marquee-content {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-around;
-  min-width: 100%;
-}
-.scrolling-container {
-  animation: scroll 40s linear infinite;
-}
-`;
-
-const founders = [
-    { 
-      name: 'Dr. Sarah Mitchell', 
-      role: 'Co-Founder & CEO', 
-      avatar: 'SM', 
-      description: 'Leads our organization with a passion for sustainable development and community empowerment.',
-      socials: {
-        linkedin: '#',
-        twitter: '#'
-      }
-    },
-    { 
-      name: 'Marcus Thompson', 
-      role: 'Co-Founder & COO', 
-      avatar: 'MT', 
-      description: 'Ensuring our global projects are delivered on time and with the greatest possible impact on communities.',
-      socials: {
-        linkedin: '#',
-        twitter: '#'
-      }
-    },
-];
-
 const teamMembers = [
-    { name: 'Emily Chen', role: 'Head of Partnerships', avatar: 'EC' },
-    { name: 'David Rodriguez', role: 'Field Coordinator', avatar: 'DR' },
-    { name: 'Jessica Lee', role: 'Marketing Lead', avatar: 'JL' },
-    { name: 'Brian Smith', role: 'Lead Developer', avatar: 'BS' },
-    { name: 'Linda Karen', role: 'Community Manager', avatar: 'LK' },
-    { name: 'Chris Evans', role: 'Healthcare Specialist', avatar: 'CE' },
+    { 
+      name: 'Dr. Aarav Sharma', 
+      role: 'Founder & Director', 
+      avatar: 'AS', 
+      description: 'Leads our organization with a vision for empowering communities through education.',
+      socials: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
+    { 
+      name: 'Priya Singh', 
+      role: 'Program Director', 
+      avatar: 'PS', 
+      description: 'Manages and oversees all our field projects, ensuring maximum impact and efficiency.',
+      socials: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
+    { 
+      name: 'Rohan Mehta', 
+      role: 'Community Outreach Coordinator', 
+      avatar: 'RM', 
+      description: 'Connects with local communities to understand their needs and build lasting relationships.',
+      socials: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
+    { 
+      name: 'Anika Gupta', 
+      role: 'Healthcare Initiatives Head', 
+      avatar: 'AG', 
+      description: 'Leads our health programs, from medical camps to awareness campaigns.',
+      socials: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
+    { 
+      name: 'Vikram Patel', 
+      role: 'Education Lead', 
+      avatar: 'VP', 
+      description: 'Develops and implements our educational curriculum and teacher training programs.',
+      socials: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
 ];
 
 
@@ -73,8 +76,6 @@ export default function AboutPage(): JSX.Element {
 
   return (
     <div className="bg-background">
-      <style>{marqueeStyles}</style>
-
       {/* Hero Section */}
       <section className="relative w-full h-[50vh] text-white">
         <Image
@@ -139,56 +140,29 @@ export default function AboutPage(): JSX.Element {
           <h2 className="text-3xl font-headline font-bold text-center mb-4">{content.team.title}</h2>
           <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">{content.team.subtitle}</p>
 
-          {/* Founders */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-headline font-semibold text-center text-primary mb-8">Our Founders</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                {founders.map((member, index) => (
-                <Card key={index} className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0">
-                    <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
-                    <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
-                    <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
-                    </Avatar>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto justify-center">
+              {teamMembers.slice(0, 5).map((member, index) => (
+              <Card key={index} className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 flex flex-col">
+                  <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
+                  <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
+                  <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-grow">
                     <h3 className="text-lg font-headline font-semibold">{member.name}</h3>
                     <p className="text-primary font-medium">{member.role}</p>
                     <p className="text-foreground/70 mt-2">{member.description}</p>
-                    <div className="mt-4 flex justify-center gap-4">
-                        <Link href={member.socials.linkedin} target="_blank" rel="noopener noreferrer">
-                            <Linkedin className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
-                        </Link>
-                         <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer">
-                            <Twitter className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
-                        </Link>
-                    </div>
-                </Card>
-                ))}
-            </div>
+                  </div>
+                  <div className="mt-4 flex justify-center gap-4">
+                      <Link href={member.socials.linkedin} target="_blank" rel="noopener noreferrer">
+                          <Linkedin className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                      </Link>
+                       <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer">
+                          <Twitter className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                      </Link>
+                  </div>
+              </Card>
+              ))}
           </div>
-
-          {/* Other Team Members Marquee */}
-          {teamMembers.length > 0 && (
-          <div>
-            <h3 className="text-2xl font-headline font-semibold text-center text-primary mb-8">Our Dedicated Team</h3>
-             <div className="relative w-full overflow-hidden group">
-                 <div className="flex scrolling-container group-hover:[animation-play-state:paused]">
-                    {[...teamMembers, ...teamMembers].map((member, index) => (
-                       <div key={index} className="marquee-content px-4">
-                            <Card className="w-72 text-center p-6 shadow-md border-0 shrink-0">
-                                <Avatar className="w-20 h-20 mx-auto mb-4 border-4 border-secondary">
-                                <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
-                                <AvatarFallback className="text-xl bg-secondary text-primary font-bold">{member.avatar}</AvatarFallback>
-                                </Avatar>
-                                <h3 className="text-md font-headline font-semibold">{member.name}</h3>
-                                <p className="text-primary/80 font-medium text-sm">{member.role}</p>
-                            </Card>
-                       </div>
-                    ))}
-                 </div>
-                 <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-background to-transparent"></div>
-                 <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-background to-transparent"></div>
-             </div>
-          </div>
-          )}
         </section>
         
         {/* Our Journey Section */}
