@@ -10,6 +10,7 @@ This is the official website for the NGO "Sarthi Shiksha Roshan Seva Samiti," bu
 - **AI-Powered Chatbot**: An intelligent assistant, powered by Google's Gemini model via Genkit, to help users navigate the site and get information quickly.
 - **Modern UI/UX**: Built with a clean, professional design system using shadcn/ui and Tailwind CSS.
 - **Interactive Forms**: User-friendly pop-up forms for donations, volunteering, and partnerships that save data directly to MongoDB.
+- **Admin Panel**: A dedicated dashboard at `/admin` to manage database content, starting with full CRUD (Create, Read, Update, Delete) functionality for team members.
 
 ## Tech Stack
 
@@ -85,8 +86,8 @@ You are now all set up for local development! The first time you load the "About
 
 ## Project Structure
 
-- `src/app/`: Contains all the pages and routes.
-- `src/components/`: Reusable React components.
+- `src/app/`: Contains all the pages and routes, including `/admin`.
+- `src/components/`: Reusable React components, including `admin` components.
 - `src/lib/`:
   - `content.ts`: All static text content for the website.
 - `src/server/`: Contains all backend logic.

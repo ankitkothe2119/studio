@@ -6,28 +6,26 @@ This document provides an overview of the backend architecture, data schemas, an
 
 The backend is built using a combination of Next.js Server Actions and Google's Genkit framework for AI-powered features. All backend-related code is organized within the `src/server/` directory.
 
--   **Next.js Server Actions (`src/server/actions.ts`)**: Handles all form submissions from the website. It receives data from the client, validates it using Zod, and processes it. In a production environment, this is where you would integrate with a database (like Firestore) or an email service.
+- **Next.js Server Actions (`src/server/actions.ts`)**: Handles all form submissions and database interactions for the website. This includes processing contact forms and managing the full CRUD lifecycle for team members via the admin panel. In a production environment, this is where you would integrate with a database (like Firestore or MongoDB) or an email service.
 
--   **Genkit (`src/server/ai/`)**: Powers the AI features of the website.
+- **Genkit (`src/server/ai/`)**: Powers the AI features of the website.
     -   `flows/chat-flow.ts`: Implements a chatbot that uses a generative model to answer user questions based on the content of the current webpage.
     -   `genkit.ts`: Configures the Genkit instance and specifies the AI model to be used.
     -   `dev.ts`: The entry point for running the Genkit development server, which makes the AI flows available for local testing.
 
 ## 2. Data Schemas
 
-The application uses `zod` to define and validate the structure of data submitted through forms. All form submissions are processed by a single server action, `handleContactForm`, which validates the data against a discriminated union of schemas.
+The application uses `zod` to define and validate the structure of data submitted through forms and managed in the database.
 
--   **Contact Form:** `name`, `email`, `message`
--   **Donation Form:** `name`, `email`, `amount`, `message` (optional)
--   **Volunteer Form:** `name`, `email`, `phone`, `interest`, `message` (optional)
--   **Corporate Partnership Form:** `companyName`, `contactPerson`, `email`, `phone`, `message`
+- **Form Submissions**: A single server action, `handleContactForm`, validates form data against a discriminated union of schemas (Donation, Volunteer, Partner, Contact).
+- **Team Members**: The `addTeamMember`, `updateTeamMember`, and `deleteTeamMember` server actions validate data against a `teamMemberSchema` before interacting with the database.
 
 ## 3. Setup and Running the Backend
 
 To run the project locally, you need two separate terminal sessions.
 
 ### 1. Run the Next.js Frontend/Backend Server:
-This command starts the main web application.
+This command starts the main web application, including the server actions.
 ```bash
 npm run dev
 ```
@@ -38,7 +36,7 @@ This command starts the Genkit server, which makes the AI flows (like the chatbo
 npm run genkit:dev
 ```
 
-Ensure you have a `.env` file in the root directory with your `GOOGLE_API_KEY`. See the main `README.md` for detailed setup instructions.
+Ensure you have a `.env` file in the root directory with your `GOOGLE_API_KEY` and `MONGODB_URI`. See the main `README.md` for detailed setup instructions.
 
 ---
 
@@ -50,24 +48,30 @@ Below is a comprehensive prompt designed to instruct a capable AI coding assista
 
 ### **Prompt:**
 
-Generate the backend code for a Next.js application for an NGO called "Sarthi Shiksha". The backend will consist of two main parts: Next.js Server Actions for form handling and Genkit flows for AI features. All backend code should be placed in a `src/server/` directory.
+Generate the backend code for a Next.js application for an NGO called "Sarthi Shiksha". The backend will consist of Next.js Server Actions for form handling and database management, and Genkit flows for AI features. All backend code should be placed in a `src/server/` directory.
 
-**Part 1: Next.js Server Action for Form Submissions**
+**Part 1: Database Setup**
 
-Create a single server action file at `src/server/actions.ts`. This file must handle submissions from four different forms: a general contact form, a donation form, a volunteer form, and a corporate partnership form.
+1.  Create a database connection file at `src/server/db/mongodb.ts` that uses `mongoose` to connect to a MongoDB database. Use the `MONGODB_URI` environment variable.
+2.  Create a models file at `src/server/db/models.ts`. Define Mongoose schemas and models for the following collections: `Donor`, `Volunteer`, `Partner`, `Contact`, and `TeamMember`.
+    -   `TeamMember` schema must include: `name`, `role`, `avatar` (2-char string), `description`, and a `category` (enum: 'Founder' or 'Team Member').
 
-1.  **Create a single exported function `handleContactForm(formData: any)`**.
-2.  Use the `zod` library to define schemas for validating the incoming `formData`. Create a discriminated union to handle the different form types.
-3.  The schemas should be as follows:
-    -   **Donation Schema**: `formType: 'Donate'`, `name: string`, `email: string`, `amount: number` (positive), `message: string` (optional)
-    -   **Volunteer Schema**: `formType: 'Volunteer'`, `name: string`, `email: string`, `phone: string`, `interest: string`, `message: string` (optional)
-    -   **Partnership Schema**: `formType: 'Partner'`, `companyName: string`, `contactPerson: string`, `email: string`, `phone: string`, `message: string`
-    -   **Contact Schema**: `name: string`, `email: string`, `message: string`. Transform it to include `formType: 'Contact'`.
-4.  The `handleContactForm` function should parse the incoming data against these schemas.
-5.  For now, the function should just `console.log` the parsed data.
-6.  The function must return a JSON object: `{ success: true, message: '...' }` on success, and `{ success: false, message: '...' }` on failure.
+**Part 2: Next.js Server Actions (`src/server/actions.ts`)**
 
-**Part 2: Genkit AI Flow for a Website Chatbot**
+1.  **Form Handling:**
+    -   Create a single exported function `handleContactForm(formData: any)`.
+    -   Use `zod` to define schemas and a discriminated union for four form types: `Donate`, `Volunteer`, `Partner`, and `Contact`.
+    -   The function should parse the incoming data and save it to the corresponding MongoDB collection.
+    -   Return a JSON object indicating success or failure.
+
+2.  **Team Member Management (for Admin Panel):**
+    -   Implement a `getTeamMembers` function to fetch all team members, separating them into `founders` and `teamMembers` based on their category. It should also seed the initial team data if the collection is empty.
+    -   Implement an `addTeamMember` function that validates data against a `zod` schema and creates a new document in the `TeamMember` collection.
+    -   Implement an `updateTeamMember` function that takes a member ID and data, validates the data, and updates the corresponding document.
+    -   Implement a `deleteTeamMember` function that takes a member ID and deletes the document.
+    -   Ensure all data-modifying actions call `revalidatePath` to update the frontend cache for `/admin/team` and `/about`.
+
+**Part 3: Genkit AI Flow for a Website Chatbot**
 
 Create a Genkit flow file at `src/server/ai/flows/chat-flow.ts`.
 
@@ -78,4 +82,3 @@ Create a Genkit flow file at `src/server/ai/flows/chat-flow.ts`.
 5.  Define a Genkit prompt named `chatWithWebsitePrompt` that instructs the model to act as a friendly chatbot for "Sarthi Shiksha", using the provided `context` to answer the user's `query`. It should not invent information.
 6.  Define a Genkit flow named `chatWithWebsiteFlow` that takes the input, calls the prompt, and returns the structured output.
 ***
-```
