@@ -1,16 +1,14 @@
 
-
-'use server';
+'use client';
 
 import React from 'react';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Eye, Heart, Goal } from 'lucide-react';
+import { Eye, Heart, Goal, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { aboutPageContent as content } from '@/lib/content';
-import { getTeamMembers } from '@/server/actions';
 import { cn } from '@/lib/utils';
 
 
@@ -38,9 +36,40 @@ const marqueeStyles = `
 }
 `;
 
+const founders = [
+    { 
+      name: 'Dr. Sarah Mitchell', 
+      role: 'Co-Founder & CEO', 
+      avatar: 'SM', 
+      description: 'Leads our organization with a passion for sustainable development and community empowerment.',
+      socials: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
+    { 
+      name: 'Marcus Thompson', 
+      role: 'Co-Founder & COO', 
+      avatar: 'MT', 
+      description: 'Ensuring our global projects are delivered on time and with the greatest possible impact on communities.',
+      socials: {
+        linkedin: '#',
+        twitter: '#'
+      }
+    },
+];
 
-export default async function AboutPage(): Promise<JSX.Element> {
-  const { founders, teamMembers } = await getTeamMembers();
+const teamMembers = [
+    { name: 'Emily Chen', role: 'Head of Partnerships', avatar: 'EC' },
+    { name: 'David Rodriguez', role: 'Field Coordinator', avatar: 'DR' },
+    { name: 'Jessica Lee', role: 'Marketing Lead', avatar: 'JL' },
+    { name: 'Brian Smith', role: 'Lead Developer', avatar: 'BS' },
+    { name: 'Linda Karen', role: 'Community Manager', avatar: 'LK' },
+    { name: 'Chris Evans', role: 'Healthcare Specialist', avatar: 'CE' },
+];
+
+
+export default function AboutPage(): JSX.Element {
 
   return (
     <div className="bg-background">
@@ -123,6 +152,14 @@ export default async function AboutPage(): Promise<JSX.Element> {
                     <h3 className="text-lg font-headline font-semibold">{member.name}</h3>
                     <p className="text-primary font-medium">{member.role}</p>
                     <p className="text-foreground/70 mt-2">{member.description}</p>
+                    <div className="mt-4 flex justify-center gap-4">
+                        <Link href={member.socials.linkedin} target="_blank" rel="noopener noreferrer">
+                            <Linkedin className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                        </Link>
+                         <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer">
+                            <Twitter className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                        </Link>
+                    </div>
                 </Card>
                 ))}
             </div>
