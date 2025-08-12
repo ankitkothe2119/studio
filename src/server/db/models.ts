@@ -69,5 +69,3 @@ export const Partner = mongoose.models.Partner || mongoose.model('Partner', part
 export const Contact = mongoose.models.Contact || mongoose.model('Contact', contactSchema);
 export const TeamMember = mongoose.models.TeamMember || mongoose.model('TeamMember', teamMemberSchema);
 export const User = mongoose.models.User || mongoose.model('User', userSchema);
-export const Admin = mongoose.models.Admin || mongoose.model('Admin', userSchema); // Keep for compatibility if needed, but User is preferred
-
