@@ -1,3 +1,4 @@
+
 /**
  * @fileoverview This file defines the Mongoose schemas and models for the application's database.
  */
@@ -49,6 +50,7 @@ const teamMemberSchema = new Schema({
     role: { type: String, required: true },
     avatar: { type: String, required: true },
     description: { type: String, required: true },
+    category: { type: String, enum: ['Founder', 'Team Member'], required: true },
 });
 
 
@@ -58,3 +60,4 @@ export const Volunteer = mongoose.models.Volunteer || mongoose.model('Volunteer'
 export const Partner = mongoose.models.Partner || mongoose.model('Partner', partnerSchema);
 export const Contact = mongoose.models.Contact || mongoose.model('Contact', contactSchema);
 export const TeamMember = mongoose.models.TeamMember || mongoose.model('TeamMember', teamMemberSchema);
+

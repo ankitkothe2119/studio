@@ -1,3 +1,4 @@
+
 'use server';
 
 import React from 'react';
@@ -9,6 +10,8 @@ import { Eye, Heart, Goal } from 'lucide-react';
 import Link from 'next/link';
 import { aboutPageContent as content } from '@/lib/content';
 import { getTeamMembers } from '@/server/actions';
+import { cn } from '@/lib/utils';
+
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
 const icons: { [key in ValueIcon]: React.ElementType } = {
@@ -17,11 +20,31 @@ const icons: { [key in ValueIcon]: React.ElementType } = {
   Goal,
 };
 
+// CSS for the marquee effect
+const marqueeStyles = `
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+.marquee-content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+}
+.scrolling-container {
+  animation: scroll 40s linear infinite;
+}
+`;
+
+
 export default async function AboutPage(): Promise<JSX.Element> {
-  const teamMembers = await getTeamMembers();
+  const { founders, teamMembers } = await getTeamMembers();
 
   return (
     <div className="bg-background">
+      <style>{marqueeStyles}</style>
+
       {/* Hero Section */}
       <section className="relative w-full h-[50vh] text-white">
         <Image
@@ -85,18 +108,46 @@ export default async function AboutPage(): Promise<JSX.Element> {
         <section className="mb-20">
           <h2 className="text-3xl font-headline font-bold text-center mb-4">{content.team.title}</h2>
           <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">{content.team.subtitle}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border-0">
-                <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
-                  <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
-                  <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
-                </Avatar>
-                <h3 className="text-lg font-headline font-semibold">{member.name}</h3>
-                <p className="text-primary font-medium">{member.role}</p>
-                <p className="text-foreground/70 mt-2">{member.description}</p>
-              </Card>
-            ))}
+
+          {/* Founders */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-headline font-semibold text-center text-primary mb-8">Our Founders</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                {founders.map((member, index) => (
+                <Card key={index} className="text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 border-0">
+                    <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
+                    <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
+                    <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
+                    </Avatar>
+                    <h3 className="text-lg font-headline font-semibold">{member.name}</h3>
+                    <p className="text-primary font-medium">{member.role}</p>
+                    <p className="text-foreground/70 mt-2">{member.description}</p>
+                </Card>
+                ))}
+            </div>
+          </div>
+
+          {/* Other Team Members Marquee */}
+          <div>
+            <h3 className="text-2xl font-headline font-semibold text-center text-primary mb-8">Our Dedicated Team</h3>
+             <div className="relative w-full overflow-hidden group">
+                 <div className="flex scrolling-container group-hover:[animation-play-state:paused]">
+                    {[...teamMembers, ...teamMembers].map((member, index) => (
+                       <div key={index} className="marquee-content px-4">
+                            <Card className="w-72 text-center p-6 shadow-md border-0 shrink-0">
+                                <Avatar className="w-20 h-20 mx-auto mb-4 border-4 border-secondary">
+                                <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
+                                <AvatarFallback className="text-xl bg-secondary text-primary font-bold">{member.avatar}</AvatarFallback>
+                                </Avatar>
+                                <h3 className="text-md font-headline font-semibold">{member.name}</h3>
+                                <p className="text-primary/80 font-medium text-sm">{member.role}</p>
+                            </Card>
+                       </div>
+                    ))}
+                 </div>
+                 <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-background to-transparent"></div>
+                 <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-background to-transparent"></div>
+             </div>
           </div>
         </section>
         
@@ -134,3 +185,4 @@ export default async function AboutPage(): Promise<JSX.Element> {
     </div>
   );
 }
+

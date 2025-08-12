@@ -1,3 +1,4 @@
+
 'use server';
 
 import { z } from 'zod';
@@ -106,18 +107,22 @@ async function seedTeamData() {
 }
 
 /**
- * Fetches all team members from the database.
- * @returns {Promise<any[]>} An array of team members.
+ * Fetches all team members from the database, categorized into founders and other members.
+ * @returns {Promise<{founders: any[], teamMembers: any[]}>} An object containing arrays of founders and team members.
  */
 export async function getTeamMembers() {
     try {
         await seedTeamData(); // Ensure data is seeded if db is empty
         const members = await TeamMember.find().lean();
-        // Mongoose returns BSON objects, so we need to convert them to plain objects
-        // and ObjectId to string for client-side consumption.
-        return JSON.parse(JSON.stringify(members));
+        const plainMembers = JSON.parse(JSON.stringify(members));
+
+        const founders = plainMembers.filter((m: any) => m.category === 'Founder');
+        const teamMembers = plainMembers.filter((m: any) => m.category === 'Team Member');
+
+        return { founders, teamMembers };
     } catch (error) {
         console.error("Failed to fetch team members:", error);
-        return []; // Return empty array on error
+        return { founders: [], teamMembers: [] }; // Return empty arrays on error
     }
 }
+

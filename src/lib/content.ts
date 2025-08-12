@@ -1,3 +1,4 @@
+
 /**
  * @fileoverview This file centralizes all the static page content for the website.
  * By keeping the content in one place, we can avoid circular dependencies
@@ -110,10 +111,12 @@ export const aboutPageContent = {
     title: 'Meet Our Team',
     subtitle: 'Dedicated professionals working to create positive change',
     members: [
-      { name: 'Dr. Sarah Mitchell', role: 'Co-Founder & CEO', avatar: 'SM', description: 'Leads our organization with a passion for sustainable development and community empowerment.' },
-      { name: 'Marcus Thompson', role: 'Project Manager', avatar: 'MT', description: 'Ensuring our global projects are delivered on time and with the greatest possible impact on communities.' },
-      { name: 'Emily Chen', role: 'Head of Partnerships', avatar: 'EC', description: 'Building strategic relationships that help us expand our reach and amplify our impact.' },
-      { name: 'David Rodriguez', role: 'Field Coordinator', avatar: 'DR', description: 'Coordinating our grassroots efforts, ensuring our projects meet the real needs of communities.' },
+      { name: 'Dr. Sarah Mitchell', role: 'Co-Founder & CEO', avatar: 'SM', description: 'Leads our organization with a passion for sustainable development and community empowerment.', category: 'Founder' },
+      { name: 'Marcus Thompson', role: 'Co-Founder & COO', avatar: 'MT', description: 'Ensuring our global projects are delivered on time and with the greatest possible impact on communities.', category: 'Founder' },
+      { name: 'Emily Chen', role: 'Head of Partnerships', avatar: 'EC', description: 'Building strategic relationships that help us expand our reach and amplify our impact.', category: 'Team Member' },
+      { name: 'David Rodriguez', role: 'Field Coordinator', avatar: 'DR', description: 'Coordinating our grassroots efforts, ensuring our projects meet the real needs of communities.', category: 'Team Member' },
+      { name: 'Jessica Lee', role: 'Marketing Lead', avatar: 'JL', description: 'Sharing our stories of impact and engaging with our community of supporters.', category: 'Team Member' },
+      { name: 'Brian Smith', role: 'Lead Developer', avatar: 'BS', description: 'Building the digital tools that power our mission and connect us with the world.', category: 'Team Member' },
     ],
   },
   journey: {
@@ -309,3 +312,4 @@ export const contactPageContent = {
     title: 'Our Location',
   }
 };
+
