@@ -7,7 +7,7 @@ This is the official website for the NGO "Sarthi Shiksha Roshan Seva Samiti," bu
 - **Responsive Design**: Fully responsive layout that works on all devices, from mobile phones to desktops.
 - **Dynamic Hero Section**: An engaging, auto-playing carousel on the homepage to showcase the NGO's mission.
 - **Subtle Animations**: Professional hover effects and transitions on interactive elements to enhance user experience.
-- **Dynamic Content**: Team member data is fetched directly from a MongoDB database.
+- **Interactive Team Profiles**: The "About Us" page features interactive cards with pop-up dialogs for detailed team member information.
 - **AI-Powered Chatbot**: An intelligent assistant, powered by Google's Gemini model via Genkit, to help users navigate the site and get information quickly.
 - **Modern UI/UX**: Built with a clean, professional design system using shadcn/ui and Tailwind CSS.
 - **Interactive Forms**: User-friendly pop-up forms for donations, volunteering, and partnerships that save data directly to MongoDB.
@@ -84,7 +84,7 @@ npm run genkit:dev
 ```
 This makes the AI flows available to the application.
 
-You are now all set up for local development! The first time you load the "About Us" page, the database will be seeded with initial team member data.
+You are now all set up for local development!
 
 ## Project Structure
 

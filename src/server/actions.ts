@@ -4,7 +4,6 @@
 import { z } from 'zod';
 import connectToDatabase from '@/server/db/mongodb';
 import { Contact, Donor, Partner, TeamMember, Volunteer, User } from '@/server/db/models';
-import { aboutPageContent } from '@/lib/content';
 import { revalidatePath } from 'next/cache';
 import bcrypt from 'bcryptjs';
 
@@ -94,36 +93,20 @@ export async function handleContactForm(formData: any) {
   }
 }
 
-
 /**
- * Seeds the database with initial team member data if it's empty.
- */
-async function seedTeamData() {
-    await connectToDatabase();
-    const count = await TeamMember.countDocuments();
-    if (count === 0) {
-        console.log('Seeding team members...');
-        await TeamMember.insertMany(aboutPageContent.team.members);
-    }
-}
-
-/**
- * Fetches all team members from the database, categorized into founders and other members.
- * @returns {Promise<{founders: any[], teamMembers: any[], allMembers: any[]}>} An object containing arrays of founders and team members.
+ * Fetches all team members from the database for the admin panel.
+ * @returns {Promise<{allMembers: any[]}>} An object containing an array of all members.
  */
 export async function getTeamMembers() {
     try {
-        await seedTeamData(); // Ensure data is seeded if db is empty
+        await connectToDatabase();
         const members = await TeamMember.find().lean();
         const plainMembers = JSON.parse(JSON.stringify(members));
 
-        const founders = plainMembers.filter((m: any) => m.category === 'Founder');
-        const teamMembers = plainMembers.filter((m: any) => m.category === 'Team Member');
-
-        return { founders, teamMembers, allMembers: plainMembers };
+        return { allMembers: plainMembers };
     } catch (error) {
         console.error("Failed to fetch team members:", error);
-        return { founders: [], teamMembers: [], allMembers: [] }; // Return empty arrays on error
+        return { allMembers: [] }; // Return empty array on error
     }
 }
 

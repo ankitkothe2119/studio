@@ -8,7 +8,7 @@ The backend is built using a combination of Next.js Server Actions and Google's 
 
 - **Next.js Server Actions (`src/server/actions.ts`)**: Handles all form submissions and data interactions for the website.
     - **Form Handling**: A single server action, `handleContactForm`, validates and processes data from various forms (Donation, Volunteer, Partner, Contact) and saves it to the appropriate MongoDB collection.
-    - **Team Member CRUD**: A full set of actions (`getTeamMembers`, `addTeamMember`, `updateTeamMember`, `deleteTeamMember`) manages the team member data for the admin panel.
+    - **Team Member CRUD**: A full set of actions (`getTeamMembers`, `addTeamMember`, `updateTeamMember`, `deleteTeamMember`) manages the team member data for the admin panel. Note that the public-facing "About Us" page uses static frontend data and is not connected to this database functionality.
     - **User Authentication**: The `signup` and `login` actions manage user accounts. New sign-ups are automatically assigned a 'user' role, while the login action verifies credentials for both 'user' and 'admin' roles.
 
 - **Genkit (`src/server/ai/`)**: Powers the AI features of the website.
@@ -68,8 +68,8 @@ Generate the backend code for a Next.js application for an NGO called "Sarthi Sh
     -   Create a single exported function `handleContactForm(formData: any)` that uses a `zod` discriminated union to validate and save data to the correct MongoDB collection (`Donor`, `Volunteer`, `Partner`, or `Contact`).
 
 2.  **Team Member Management (for Admin Panel):**
-    -   `getTeamMembers`: Fetches all team members and seeds initial data if the collection is empty.
-    -   `addTeamMember`, `updateTeamMember`, `deleteTeamMember`: Implement full CRUD functionality, validating data with a `zod` schema and calling `revalidatePath` for `/admin/team` and `/about` on data changes.
+    -   `getTeamMembers`: Fetches all team members from the database.
+    -   `addTeamMember`, `updateTeamMember`, `deleteTeamMember`: Implement full CRUD functionality, validating data with a `zod` schema and calling `revalidatePath` for `/admin/team` on data changes.
 
 3.  **User Authentication:**
     -   `signup`: Takes user data, validates it, hashes the password using `bcryptjs`, and creates a new document in the `User` collection with the `role` set to 'user'.
