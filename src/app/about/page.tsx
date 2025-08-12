@@ -85,13 +85,62 @@ const teamMembers = [
 ];
 
 const otherTeamMembers = [
-  { name: 'Sameer Khan', role: 'Logistics Manager', avatar: 'SK' },
-  { name: 'Neha Desai', role: 'Finance Officer', avatar: 'ND' },
-  { name: 'Arjun Reddy', role: 'IT Specialist', avatar: 'AR' },
-  { name: 'Kavita Iyer', role: 'Legal Advisor', avatar: 'KI' },
-  { name: 'Rajesh Kumar', role: 'Field Officer', avatar: 'RK' },
-  { name: 'Sunita Patil', role: 'Admin Assistant', avatar: 'SP' },
-  { name: 'Mahesh Babu', role: 'Driver', avatar: 'MB' },
+  { 
+    name: 'Sameer Khan', 
+    role: 'Logistics Manager', 
+    avatar: 'SK',
+    image: 'https://placehold.co/500x500.png',
+    longDescription: 'Sameer Khan ensures that all our projects have the resources they need, when they need them. He is a master of supply chain management and procurement, making sure our operations run smoothly and efficiently.',
+    socials: { linkedin: '#', twitter: '#' }
+  },
+  { 
+    name: 'Neha Desai', 
+    role: 'Finance Officer', 
+    avatar: 'ND',
+    image: 'https://placehold.co/500x500.png',
+    longDescription: 'Neha Desai manages our finances with utmost transparency and integrity. She is responsible for budgeting, financial reporting, and ensuring every donation is used effectively to maximize its impact.',
+    socials: { linkedin: '#', twitter: '#' }
+  },
+  { 
+    name: 'Arjun Reddy', 
+    role: 'IT Specialist', 
+    avatar: 'AR',
+    image: 'https://placehold.co/500x500.png',
+    longDescription: 'Arjun Reddy is the technical backbone of our organization. He manages our digital infrastructure, from the website to our internal communication systems, ensuring we stay connected and secure.',
+    socials: { linkedin: '#', twitter: '#' }
+  },
+  { 
+    name: 'Kavita Iyer', 
+    role: 'Legal Advisor', 
+    avatar: 'KI',
+    image: 'https://placehold.co/500x500.png',
+    longDescription: 'Kavita Iyer provides pro bono legal counsel to our organization. Her expertise in non-profit law helps us navigate complex regulations and maintain our commitment to ethical practices.',
+    socials: { linkedin: '#', twitter: '#' }
+  },
+  { 
+    name: 'Rajesh Kumar', 
+    role: 'Field Officer', 
+    avatar: 'RK',
+    image: 'https://placehold.co/500x500.png',
+    longDescription: 'Rajesh Kumar works on the front lines, implementing our projects directly within the communities we serve. His dedication and hands-on approach are vital to our success.',
+    socials: { linkedin: '#', twitter: '#' }
+  },
+  { 
+    name: 'Sunita Patil', 
+    role: 'Admin Assistant', 
+    avatar: 'SP',
+    image: 'https://placehold.co/500x500.png',
+    longDescription: 'Sunita Patil keeps our office running like a well-oiled machine. She handles administrative tasks with a smile, providing crucial support to the entire team.',
+    socials: { linkedin: '#', twitter: '#' }
+  },
+  { 
+    name: 'Mahesh Babu', 
+    role: 'Driver', 
+    avatar: 'MB',
+    image: 'https://placehold.co/500x500.png',
+    longDescription: 'Mahesh Babu is our trusted driver, ensuring our team and supplies get to where they need to go, safely and on time. He is an essential part of our logistical operations.',
+    socials: { linkedin: '#', twitter: '#' }
+  },
 ];
 
 
@@ -228,18 +277,42 @@ export default function AboutPage(): JSX.Element {
                     {otherTeamMembers.map((member, index) => (
                         <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/4">
                             <div className="p-1">
-                                <Card className="pt-6">
-                                    <CardContent className="flex flex-col items-center justify-center space-y-2">
-                                        <Avatar className="w-20 h-20">
-                                            <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
-                                            <AvatarFallback className="text-xl bg-secondary text-secondary-foreground font-bold">{member.avatar}</AvatarFallback>
-                                        </Avatar>
-                                        <div className="text-center">
-                                            <p className="font-semibold text-md">{member.name}</p>
-                                            <p className="text-sm text-muted-foreground">{member.role}</p>
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <Card className="pt-6 cursor-pointer">
+                                            <CardContent className="flex flex-col items-center justify-center space-y-2">
+                                                <Avatar className="w-20 h-20">
+                                                    <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
+                                                    <AvatarFallback className="text-xl bg-secondary text-secondary-foreground font-bold">{member.avatar}</AvatarFallback>
+                                                </Avatar>
+                                                <div className="text-center">
+                                                    <p className="font-semibold text-md">{member.name}</p>
+                                                    <p className="text-sm text-muted-foreground">{member.role}</p>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[625px]">
+                                        <DialogHeader>
+                                            <div className="relative w-full h-64 rounded-t-lg overflow-hidden mb-4">
+                                                <Image src={member.image} alt={member.name} data-ai-hint="portrait professional" layout="fill" objectFit="cover" />
+                                            </div>
+                                            <DialogTitle className="text-2xl font-bold text-center">{member.name}</DialogTitle>
+                                            <DialogDescription className="text-center text-primary text-lg">{member.role}</DialogDescription>
+                                        </DialogHeader>
+                                        <div className="py-4 text-center">
+                                            <p className="text-base leading-relaxed text-foreground/80">{member.longDescription}</p>
                                         </div>
-                                    </CardContent>
-                                </Card>
+                                        <div className="mt-4 flex justify-center gap-6">
+                                            <Link href={member.socials.linkedin} target="_blank" rel="noopener noreferrer">
+                                                <Linkedin className="h-8 w-8 text-foreground/60 hover:text-primary transition-colors"/>
+                                            </Link>
+                                            <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer">
+                                                <Twitter className="h-8 w-8 text-foreground/60 hover:text-primary transition-colors"/>
+                                            </Link>
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
                             </div>
                         </CarouselItem>
                     ))}
@@ -283,3 +356,5 @@ export default function AboutPage(): JSX.Element {
     </div>
   );
 }
+
+    
