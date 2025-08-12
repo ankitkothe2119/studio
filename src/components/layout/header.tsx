@@ -1,3 +1,4 @@
+
 'use client';
 /**
  * @fileoverview This file defines the Header component, which serves as the main navigation bar for the website.
@@ -63,11 +64,12 @@ export function Header(): JSX.Element {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2" passHref>
-          <div className="flex items-center gap-3 text-primary hover:text-primary/80 transition-colors">
+        <Link href="/" className="flex items-center gap-2 group" passHref>
+          <div className="flex items-center gap-3 text-primary group-hover:text-primary/80 transition-colors">
             <Image src="/logo.png" alt="Sarthi Shiksha Roshan Seva Samiti Logo" width={50} height={50} className="rounded-full"/>
             <span className="text-xl font-headline font-bold tracking-tight text-foreground">
               Sarthi Shiksha
+              <span className="hidden md:inline group-hover:inline"> Roshan Seva Samiti</span>
             </span>
           </div>
         </Link>

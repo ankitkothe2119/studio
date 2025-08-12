@@ -19,7 +19,7 @@ export function Footer(): JSX.Element {
                 <Link href="/" className="flex items-center gap-2 mb-4">
                     <Image src="/logo.png" alt="Sarthi Shiksha Roshan Seva Samiti Logo" width={50} height={50} className="rounded-full" />
                     <span className="text-xl font-headline font-bold tracking-tight text-white">
-                        Sarthi Shiksha
+                        Sarthi Shiksha Roshan Seva Samiti
                     </span>
                 </Link>
                 <p className="text-sm">The best way to find yourself is to lose yourself in the service of others.</p>
