@@ -114,4 +114,3 @@ export function TeamMemberFormDialog({ trigger, member }: TeamMemberFormDialogPr
     </Dialog>
   );
 }
-

@@ -149,6 +149,9 @@ export async function addTeamMember(data: unknown) {
         revalidatePath('/about');
         return { success: true, message: 'Team member added successfully.' };
     } catch (error) {
+        if (error instanceof z.ZodError) {
+            return { success: false, message: error.errors.map(e => e.message).join(', ') };
+        }
         console.error('Failed to add team member:', error);
         return { success: false, message: 'Failed to add team member.' };
     }
@@ -169,6 +172,9 @@ export async function updateTeamMember(id: string, data: unknown) {
         revalidatePath('/about');
         return { success: true, message: 'Team member updated successfully.' };
     } catch (error) {
+        if (error instanceof z.ZodError) {
+            return { success: false, message: error.errors.map(e => e.message).join(', ') };
+        }
         console.error('Failed to update team member:', error);
         return { success: false, message: 'Failed to update team member.' };
     }

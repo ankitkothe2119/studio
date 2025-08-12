@@ -50,7 +50,7 @@ export function TeamMemberTable({ data }: { data: any[] }) {
             <TableCell className="text-right">
               <div className="flex justify-end gap-2">
                  <TeamMemberFormDialog 
-                    member={member}
+                    member={JSON.parse(JSON.stringify(member))}
                     trigger={<Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>}
                 />
                 <DeleteMemberAlert

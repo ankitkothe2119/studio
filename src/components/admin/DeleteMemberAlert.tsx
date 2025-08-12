@@ -59,4 +59,3 @@ export function DeleteMemberAlert({ trigger, memberId }: DeleteMemberAlertProps)
         </AlertDialog>
     );
 }
-
