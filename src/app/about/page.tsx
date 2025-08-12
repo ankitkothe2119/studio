@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { aboutPageContent as content } from '@/lib/content';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 
 type ValueIcon = 'Eye' | 'Heart' | 'Goal';
@@ -25,7 +26,9 @@ const teamMembers = [
       name: 'Dr. Aarav Sharma', 
       role: 'Founder & Director', 
       avatar: 'AS', 
+      image: 'https://placehold.co/500x500.png',
       description: 'Leads our organization with a vision for empowering communities through education.',
+      longDescription: 'Dr. Aarav Sharma has over two decades of experience in the non-profit sector, specializing in educational program development and sustainable community-building. His passion for social change and dedication to grassroots activism have been the driving forces behind our NGO\'s success. He holds a Ph.D. in Social Work from the University of Delhi.',
       socials: {
         linkedin: '#',
         twitter: '#'
@@ -35,7 +38,9 @@ const teamMembers = [
       name: 'Priya Singh', 
       role: 'Program Director', 
       avatar: 'PS', 
+      image: 'https://placehold.co/500x500.png',
       description: 'Manages and oversees all our field projects, ensuring maximum impact and efficiency.',
+      longDescription: 'Priya Singh is an expert in project management and community engagement. She is responsible for the end-to-end execution of our initiatives, from planning and resource allocation to monitoring and evaluation. Her work ensures that our projects are not only effective but also culturally sensitive and sustainable.',
       socials: {
         linkedin: '#',
         twitter: '#'
@@ -45,7 +50,9 @@ const teamMembers = [
       name: 'Rohan Mehta', 
       role: 'Community Outreach Coordinator', 
       avatar: 'RM', 
+      image: 'https://placehold.co/500x500.png',
       description: 'Connects with local communities to understand their needs and build lasting relationships.',
+      longDescription: 'Rohan Mehta is the bridge between our organization and the communities we serve. He spends most of his time in the field, conducting needs assessments, building trust, and ensuring that our programs are designed with the community\'s input and participation. His empathetic approach is key to our success.',
       socials: {
         linkedin: '#',
         twitter: '#'
@@ -55,7 +62,9 @@ const teamMembers = [
       name: 'Anika Gupta', 
       role: 'Healthcare Initiatives Head', 
       avatar: 'AG', 
+      image: 'https://placehold.co/500x500.png',
       description: 'Leads our health programs, from medical camps to awareness campaigns.',
+      longDescription: 'With a background in public health, Anika Gupta designs and implements all our healthcare programs. She works tirelessly to improve access to medical services, promote hygiene, and educate communities on preventive healthcare. Her efforts have significantly reduced the incidence of preventable diseases in our project areas.',
       socials: {
         linkedin: '#',
         twitter: '#'
@@ -65,7 +74,9 @@ const teamMembers = [
       name: 'Vikram Patel', 
       role: 'Education Lead', 
       avatar: 'VP', 
+      image: 'https://placehold.co/500x500.png',
       description: 'Develops and implements our educational curriculum and teacher training programs.',
+      longDescription: 'Vikram Patel is a seasoned educator dedicated to making quality education accessible to all. He develops our curriculum, trains our teachers, and establishes learning centers in remote areas. His innovative teaching methods have inspired a love for learning in thousands of children.',
       socials: {
         linkedin: '#',
         twitter: '#'
@@ -153,26 +164,50 @@ export default function AboutPage(): JSX.Element {
           <p className="text-center text-foreground/70 mb-12 max-w-2xl mx-auto">{content.team.subtitle}</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto justify-center">
-              {teamMembers.slice(0, 5).map((member, index) => (
-              <Card key={index} className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 flex flex-col">
-                  <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
-                  <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
-                  <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-grow">
-                    <h3 className="text-lg font-headline font-semibold">{member.name}</h3>
-                    <p className="text-primary font-medium">{member.role}</p>
-                    <p className="text-foreground/70 mt-2">{member.description}</p>
-                  </div>
-                  <div className="mt-4 flex justify-center gap-4">
+              {teamMembers.map((member, index) => (
+                <Dialog key={index}>
+                  <DialogTrigger asChild>
+                    <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 flex flex-col cursor-pointer">
+                        <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
+                        <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
+                        <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-grow">
+                          <h3 className="text-lg font-headline font-semibold">{member.name}</h3>
+                          <p className="text-primary font-medium">{member.role}</p>
+                          <p className="text-foreground/70 mt-2">{member.description}</p>
+                        </div>
+                        <div className="mt-4 flex justify-center gap-4">
+                            <Link href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                <Linkedin className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                            </Link>
+                             <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                <Twitter className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                            </Link>
+                        </div>
+                    </Card>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[625px]">
+                    <DialogHeader>
+                        <div className="relative w-full h-64 rounded-t-lg overflow-hidden mb-4">
+                            <Image src={member.image} alt={member.name} data-ai-hint="portrait professional" layout="fill" objectFit="cover" />
+                        </div>
+                       <DialogTitle className="text-2xl font-bold text-center">{member.name}</DialogTitle>
+                       <DialogDescription className="text-center text-primary text-lg">{member.role}</DialogDescription>
+                    </DialogHeader>
+                    <div className="py-4 text-center">
+                        <p className="text-base leading-relaxed text-foreground/80">{member.longDescription}</p>
+                    </div>
+                    <div className="mt-4 flex justify-center gap-6">
                       <Link href={member.socials.linkedin} target="_blank" rel="noopener noreferrer">
-                          <Linkedin className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                          <Linkedin className="h-8 w-8 text-foreground/60 hover:text-primary transition-colors"/>
                       </Link>
                        <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer">
-                          <Twitter className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                          <Twitter className="h-8 w-8 text-foreground/60 hover:text-primary transition-colors"/>
                       </Link>
                   </div>
-              </Card>
+                  </DialogContent>
+                </Dialog>
               ))}
           </div>
         </section>
