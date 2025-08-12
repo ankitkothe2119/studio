@@ -63,7 +63,7 @@ export default function Home(): JSX.Element {
         </Carousel>
 
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center h-full text-center px-4">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight leading-tight">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-headline font-bold tracking-tight leading-tight">
             <span>{line1}</span>
             <br />
             <span>{line2}</span>
