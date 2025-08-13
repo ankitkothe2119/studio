@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Eye, Heart, Goal, Linkedin, Twitter } from 'lucide-react';
+import { Eye, Heart, Goal, Linkedin, Twitter, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { aboutPageContent as content } from '@/lib/content';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
@@ -31,7 +31,8 @@ const teamMembers = [
       longDescription: 'Dr. Aarav Sharma has over two decades of experience in the non-profit sector, specializing in educational program development and sustainable community-building. His passion for social change and dedication to grassroots activism have been the driving forces behind our NGO\'s success. He holds a Ph.D. in Social Work from the University of Delhi.',
       socials: {
         linkedin: '#',
-        twitter: '#'
+        twitter: '#',
+        email: 'mailto:aarav.sharma@example.com'
       }
     },
     { 
@@ -43,7 +44,8 @@ const teamMembers = [
       longDescription: 'Priya Singh is an expert in project management and community engagement. She is responsible for the end-to-end execution of our initiatives, from planning and resource allocation to monitoring and evaluation. Her work ensures that our projects are not only effective but also culturally sensitive and sustainable.',
       socials: {
         linkedin: '#',
-        twitter: '#'
+        twitter: '#',
+        email: 'mailto:priya.singh@example.com'
       }
     },
     { 
@@ -55,7 +57,8 @@ const teamMembers = [
       longDescription: 'Rohan Mehta is the bridge between our organization and the communities we serve. He spends most of his time in the field, conducting needs assessments, building trust, and ensuring that our programs are designed with the community\'s input and participation. His empathetic approach is key to our success.',
       socials: {
         linkedin: '#',
-        twitter: '#'
+        twitter: '#',
+        email: 'mailto:rohan.mehta@example.com'
       }
     },
     { 
@@ -67,7 +70,8 @@ const teamMembers = [
       longDescription: 'With a background in public health, Anika Gupta designs and implements all our healthcare programs. She works tirelessly to improve access to medical services, promote hygiene, and educate communities on preventive healthcare. Her efforts have significantly reduced the incidence of preventable diseases in our project areas.',
       socials: {
         linkedin: '#',
-        twitter: '#'
+        twitter: '#',
+        email: 'mailto:anika.gupta@example.com'
       }
     },
     { 
@@ -79,7 +83,8 @@ const teamMembers = [
       longDescription: 'Vikram Patel is a seasoned educator dedicated to making quality education accessible to all. He develops our curriculum, trains our teachers, and establishes learning centers in remote areas. His innovative teaching methods have inspired a love for learning in thousands of children.',
       socials: {
         linkedin: '#',
-        twitter: '#'
+        twitter: '#',
+        email: 'mailto:vikram.patel@example.com'
       }
     },
 ];
@@ -91,7 +96,7 @@ const otherTeamMembers = [
     avatar: 'SK',
     image: 'https://placehold.co/500x500.png',
     longDescription: 'Sameer Khan ensures that all our projects have the resources they need, when they need them. He is a master of supply chain management and procurement, making sure our operations run smoothly and efficiently.',
-    socials: { linkedin: '#', twitter: '#' }
+    socials: { linkedin: '#', twitter: '#', email: 'mailto:sameer.khan@example.com' }
   },
   { 
     name: 'Neha Desai', 
@@ -99,7 +104,7 @@ const otherTeamMembers = [
     avatar: 'ND',
     image: 'https://placehold.co/500x500.png',
     longDescription: 'Neha Desai manages our finances with utmost transparency and integrity. She is responsible for budgeting, financial reporting, and ensuring every donation is used effectively to maximize its impact.',
-    socials: { linkedin: '#', twitter: '#' }
+    socials: { linkedin: '#', twitter: '#', email: 'mailto:neha.desai@example.com' }
   },
   { 
     name: 'Arjun Reddy', 
@@ -107,7 +112,7 @@ const otherTeamMembers = [
     avatar: 'AR',
     image: 'https://placehold.co/500x500.png',
     longDescription: 'Arjun Reddy is the technical backbone of our organization. He manages our digital infrastructure, from the website to our internal communication systems, ensuring we stay connected and secure.',
-    socials: { linkedin: '#', twitter: '#' }
+    socials: { linkedin: '#', twitter: '#', email: 'mailto:arjun.reddy@example.com' }
   },
   { 
     name: 'Kavita Iyer', 
@@ -115,7 +120,7 @@ const otherTeamMembers = [
     avatar: 'KI',
     image: 'https://placehold.co/500x500.png',
     longDescription: 'Kavita Iyer provides pro bono legal counsel to our organization. Her expertise in non-profit law helps us navigate complex regulations and maintain our commitment to ethical practices.',
-    socials: { linkedin: '#', twitter: '#' }
+    socials: { linkedin: '#', twitter: '#', email: 'mailto:kavita.iyer@example.com' }
   },
   { 
     name: 'Rajesh Kumar', 
@@ -123,7 +128,7 @@ const otherTeamMembers = [
     avatar: 'RK',
     image: 'https://placehold.co/500x500.png',
     longDescription: 'Rajesh Kumar works on the front lines, implementing our projects directly within the communities we serve. His dedication and hands-on approach are vital to our success.',
-    socials: { linkedin: '#', twitter: '#' }
+    socials: { linkedin: '#', twitter: '#', email: 'mailto:rajesh.kumar@example.com' }
   },
   { 
     name: 'Sunita Patil', 
@@ -131,7 +136,7 @@ const otherTeamMembers = [
     avatar: 'SP',
     image: 'https://placehold.co/500x500.png',
     longDescription: 'Sunita Patil keeps our office running like a well-oiled machine. She handles administrative tasks with a smile, providing crucial support to the entire team.',
-    socials: { linkedin: '#', twitter: '#' }
+    socials: { linkedin: '#', twitter: '#', email: 'mailto:sunita.patil@example.com' }
   },
   { 
     name: 'Mahesh Babu', 
@@ -139,7 +144,7 @@ const otherTeamMembers = [
     avatar: 'MB',
     image: 'https://placehold.co/500x500.png',
     longDescription: 'Mahesh Babu is our trusted driver, ensuring our team and supplies get to where they need to go, safely and on time. He is an essential part of our logistical operations.',
-    socials: { linkedin: '#', twitter: '#' }
+    socials: { linkedin: '#', twitter: '#', email: 'mailto:mahesh.babu@example.com' }
   },
 ];
 
@@ -233,6 +238,9 @@ export default function AboutPage(): JSX.Element {
                              <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                                 <Twitter className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
                             </Link>
+                            <Link href={member.socials.email} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                <Mail className="h-6 w-6 text-foreground/60 hover:text-primary transition-colors"/>
+                            </Link>
                         </div>
                     </Card>
                   </DialogTrigger>
@@ -253,6 +261,9 @@ export default function AboutPage(): JSX.Element {
                       </Link>
                        <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer">
                           <Twitter className="h-8 w-8 text-foreground/60 hover:text-primary transition-colors"/>
+                      </Link>
+                      <Link href={member.socials.email} target="_blank" rel="noopener noreferrer">
+                          <Mail className="h-8 w-8 text-foreground/60 hover:text-primary transition-colors"/>
                       </Link>
                   </div>
                   </DialogContent>
@@ -310,6 +321,9 @@ export default function AboutPage(): JSX.Element {
                                             <Link href={member.socials.twitter} target="_blank" rel="noopener noreferrer">
                                                 <Twitter className="h-8 w-8 text-foreground/60 hover:text-primary transition-colors"/>
                                             </Link>
+                                            <Link href={member.socials.email} target="_blank" rel="noopener noreferrer">
+                                                <Mail className="h-8 w-8 text-foreground/60 hover:text-primary transition-colors"/>
+                                            </Link>
                                         </div>
                                     </DialogContent>
                                 </Dialog>
@@ -356,5 +370,7 @@ export default function AboutPage(): JSX.Element {
     </div>
   );
 }
+
+    
 
     
