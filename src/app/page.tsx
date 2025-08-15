@@ -20,10 +20,10 @@ const icons: { [key in FocusIcon]: React.ElementType } = {
 };
 
 const heroImages = [
-    { src: 'https://images.unsplash.com/photo-1588954521402-729fccacba74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBlZHVjYXRpb258ZW58MHx8fHwxNzU0OTk3MjY1fDA&ixlib=rb-4.1.0&q=80&w=1080', hint: 'community education' },
-    { src: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaGFyaXR5fGVufDB8fHx8MTc1NTA1ODQ4MXww&ixlib=rb-4.1.0&q=80&w=1080', hint: 'hands holding grain' },
-    { src: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxJbmRpYXxlbnwwfHx8fDE3NTUwNTg1MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080', hint: 'Taj Mahal' },
-    { src: 'https://images.unsplash.com/photo-1459183885421-5cc68f6b8e84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx2b2x1bnRlZXJzfGVufDB8fHx8MTc1NTA1ODU2Nnww&ixlib=rb-4.1.0&q=80&w=1080', hint: 'volunteers planting tree' },
+    { src: 'https://images.unsplash.com/photo-1588954521402-729fccacba74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBlZHVjYXRpb258ZW58MHx8fHwxNzU0OTk3MjY1fDA&ixlib.rb-4.1.0&q=80&w=1080', hint: 'community education' },
+    { src: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaGFyaXR5fGVufDB8fHx8MTc1NTA1ODQ4MXww&ixlib.rb-4.1.0&q=80&w=1080', hint: 'hands holding grain' },
+    { src: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxJbmRpYXxlbnwwfHx8fDE3NTUwNTg1MTJ8MA&ixlib.rb-4.1.0&q=80&w=1080', hint: 'Taj Mahal' },
+    { src: 'https://placehold.co/1080x720.png', hint: 'volunteers planting tree' },
 ];
 
 export default function Home(): JSX.Element {
@@ -109,7 +109,7 @@ export default function Home(): JSX.Element {
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
                 <Image
-                    src="https://images.unsplash.com/photo-1722252799088-4781aabc3d0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBnYXRoZXJpbmd8ZW58MHx8fHwxNzU0OTk3MjY1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                    src="https://images.unsplash.com/photo-1722252799088-4781aabc3d0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBnYXRoZXJpbmd8ZW58MHx8fHwxNzU0OTk3MjY1fDA&ixlib.rb-4.1.0&q=80&w=1080"
                     alt="Community gathering"
                     data-ai-hint="community gathering"
                     width={600}
