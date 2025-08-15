@@ -26,7 +26,7 @@ const teamMembers = [
       name: 'Dr. Aarav Sharma', 
       role: 'Founder & Director', 
       avatar: 'AS', 
-      image: 'https://placehold.co/500x500.png',
+      image: 'https://res.cloudinary.com/dkkmvurjd/image/upload/v1755245262/WhatsApp_Image_2025-07-26_at_18.17.56_7bc284df_kkito0.jpg',
       description: 'Leads our organization with a vision for empowering communities through education.',
       longDescription: 'Dr. Aarav Sharma has over two decades of experience in the non-profit sector, specializing in educational program development and sustainable community-building. His passion for social change and dedication to grassroots activism have been the driving forces behind our NGO\'s success. He holds a Ph.D. in Social Work from the University of Delhi.',
       socials: {
@@ -223,7 +223,7 @@ export default function AboutPage(): JSX.Element {
                   <DialogTrigger asChild>
                     <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 flex flex-col cursor-pointer">
                         <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
-                        <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
+                        <AvatarImage src={member.image} alt={member.name} data-ai-hint="portrait person" />
                         <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
                         </Avatar>
                         <div className="flex-grow">
@@ -290,10 +290,10 @@ export default function AboutPage(): JSX.Element {
                             <div className="p-1">
                                 <Dialog>
                                     <DialogTrigger asChild>
-                                        <Card className="pt-6 cursor-pointer">
+                                        <Card className="pt-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                                             <CardContent className="flex flex-col items-center justify-center space-y-2">
                                                 <Avatar className="w-20 h-20">
-                                                    <AvatarImage src={`https://placehold.co/100x100.png`} alt={member.name} data-ai-hint="portrait person" />
+                                                    <AvatarImage src={member.image} alt={member.name} data-ai-hint="portrait person" />
                                                     <AvatarFallback className="text-xl bg-secondary text-secondary-foreground font-bold">{member.avatar}</AvatarFallback>
                                                 </Avatar>
                                                 <div className="text-center">
@@ -370,6 +370,8 @@ export default function AboutPage(): JSX.Element {
     </div>
   );
 }
+
+    
 
     
 
