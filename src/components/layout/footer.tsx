@@ -24,10 +24,10 @@ export function Footer(): JSX.Element {
                 </Link>
                 <p className="text-sm">The best way to find yourself is to lose yourself in the service of others.</p>
                 <div className="flex gap-4 mt-4">
-                    <Link href="#" className="hover:text-primary"><Facebook size={20} /></Link>
-                    <Link href="#" className="hover:text-primary"><Twitter size={20} /></Link>
-                    <Link href="#" className="hover:text-primary"><Instagram size={20} /></Link>
-                    <Link href="#" className="hover:text-primary"><Linkedin size={20} /></Link>
+                    <Link href="https://www.facebook.com/share/1J4oAxwoyj/" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Facebook size={20} /></Link>
+                    <Link href="https://x.com/BabitaKothe?t=30wstVBeJN35x-gLPvuqUQ&s=08" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Twitter size={20} /></Link>
+                    <Link href="https://www.instagram.com/sarthi_shiksharoshansevasamiti?igsh=MW10NTA3Zno1YnMyMA==&utm_source=ig_contact_invite" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Instagram size={20} /></Link>
+                    <Link href="https://www.linkedin.com/in/sarthishiksharoshan-sevasamiti-400469373?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Linkedin size={20} /></Link>
                 </div>
             </div>
              <div>
@@ -51,7 +51,7 @@ export function Footer(): JSX.Element {
              <div>
                 <h4 className="font-semibold text-white mb-4">Contact Info</h4>
                  <ul className="space-y-2">
-                    <li className="flex items-start">123 Seva Marg, New Delhi, 110001</li>
+                    <li className="flex items-start">150 jeet nagar Indore 452001</li>
                     <li className="flex items-start">+91 12345 67890</li>
                     <li className="flex items-start">info@sarthishiksha.org</li>
                 </ul>
