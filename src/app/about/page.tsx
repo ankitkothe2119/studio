@@ -23,129 +23,216 @@ const icons: { [key in ValueIcon]: React.ElementType } = {
 
 const teamMembers = [
     { 
-      name: 'Dr. Aarav Sharma', 
-      role: 'Founder & Director', 
-      avatar: 'AS', 
+      name: 'BABITA KOTHE', 
+      role: 'President', 
+      avatar: 'BK', 
       image: 'https://res.cloudinary.com/dkkmvurjd/image/upload/v1755245262/WhatsApp_Image_2025-07-26_at_18.17.56_7bc284df_kkito0.jpg',
-      description: 'Leads our organization with a vision for empowering communities through education.',
-      longDescription: 'Dr. Aarav Sharma has over two decades of experience in the non-profit sector, specializing in educational program development and sustainable community-building. His passion for social change and dedication to grassroots activism have been the driving forces behind our NGO\'s success. He holds a Ph.D. in Social Work from the University of Delhi.',
+      description: 'Student and dedicated leader with vision for community empowerment',
+      longDescription: 'BABITA KOTHE serves as the President of our organization, bringing fresh perspectives and student leadership to drive our mission forward. As a dedicated student, she combines academic excellence with practical leadership skills to guide our team effectively.',
       socials: {
         linkedin: '#',
         twitter: '#',
-        email: 'mailto:aarav.sharma@example.com'
+        email: 'mailto:kothebabita@gmail.com'
       }
     },
     { 
-      name: 'Priya Singh', 
-      role: 'Program Director', 
-      avatar: 'PS', 
+      name: 'ROSHAN PATIL', 
+      role: 'Vice President', 
+      avatar: 'RP', 
       image: 'https://placehold.co/500x500.png',
-      description: 'Manages and oversees all our field projects, ensuring maximum impact and efficiency.',
-      longDescription: 'Priya Singh is an expert in project management and community engagement. She is responsible for the end-to-end execution of our initiatives, from planning and resource allocation to monitoring and evaluation. Her work ensures that our projects are not only effective but also culturally sensitive and sustainable.',
+      description: 'Businessman with strategic vision and community development expertise',
+      longDescription: 'ROSHAN PATIL brings valuable business acumen to our organization as Vice President. His experience as a businessman helps us maintain sustainable operations while expanding our community impact through strategic partnerships and resource management.',
       socials: {
         linkedin: '#',
         twitter: '#',
-        email: 'mailto:priya.singh@example.com'
+        email: 'mailto:roshpatilo@gmail.com'
       }
     },
     { 
-      name: 'Rohan Mehta', 
-      role: 'Community Outreach Coordinator', 
-      avatar: 'RM', 
+      name: 'SALOMI REDDY', 
+      role: 'Secretary', 
+      avatar: 'SR', 
       image: 'https://placehold.co/500x500.png',
-      description: 'Connects with local communities to understand their needs and build lasting relationships.',
-      longDescription: 'Rohan Mehta is the bridge between our organization and the communities we serve. He spends most of his time in the field, conducting needs assessments, building trust, and ensuring that our programs are designed with the community\'s input and participation. His empathetic approach is key to our success.',
+      description: 'Working professional with excellent organizational and communication skills',
+      longDescription: 'SALOMI REDDY serves as our Secretary, leveraging her professional experience to maintain efficient operations and clear communication channels. Her background as a working professional brings valuable organizational expertise to our team.',
       socials: {
         linkedin: '#',
         twitter: '#',
-        email: 'mailto:rohan.mehta@example.com'
+        email: 'mailto:Salomir30005@gmail.com'
       }
     },
     { 
-      name: 'Anika Gupta', 
-      role: 'Healthcare Initiatives Head', 
-      avatar: 'AG', 
+      name: 'ANKIT KOTHE', 
+      role: 'Treasurer', 
+      avatar: 'AK', 
       image: 'https://placehold.co/500x500.png',
-      description: 'Leads our health programs, from medical camps to awareness campaigns.',
-      longDescription: 'With a background in public health, Anika Gupta designs and implements all our healthcare programs. She works tirelessly to improve access to medical services, promote hygiene, and educate communities on preventive healthcare. Her efforts have significantly reduced the incidence of preventable diseases in our project areas.',
+      description: 'Student with strong financial management and accountability skills',
+      longDescription: 'ANKIT KOTHE manages our financial operations as Treasurer. Despite being a student, he demonstrates exceptional responsibility in managing funds and maintaining transparent financial records for our organization.',
       socials: {
         linkedin: '#',
         twitter: '#',
-        email: 'mailto:anika.gupta@example.com'
+        email: 'mailto:ankiitkothe@gmail.com'
       }
     },
     { 
-      name: 'Vikram Patel', 
-      role: 'Education Lead', 
-      avatar: 'VP', 
+      name: 'SHREHARSH DUBEY', 
+      role: 'Joint Secretary', 
+      avatar: 'SD', 
       image: 'https://placehold.co/500x500.png',
-      description: 'Develops and implements our educational curriculum and teacher training programs.',
-      longDescription: 'Vikram Patel is a seasoned educator dedicated to making quality education accessible to all. He develops our curriculum, trains our teachers, and establishes learning centers in remote areas. His innovative teaching methods have inspired a love for learning in thousands of children.',
+      description: 'Student leader with collaborative approach and administrative skills',
+      longDescription: 'SHREHARSH DUBEY serves as Joint Secretary, supporting the Secretary in maintaining smooth operations. His student perspective brings fresh ideas while his leadership skills help coordinate team activities effectively.',
       socials: {
         linkedin: '#',
         twitter: '#',
-        email: 'mailto:vikram.patel@example.com'
+        email: 'mailto:shreash7319@gmail.com'
+      }
+    },
+    { 
+      name: 'RENUKA PATIL', 
+      role: 'Member', 
+      avatar: 'RP', 
+      image: 'https://placehold.co/500x500.png',
+      description: 'Active student member contributing to community initiatives',
+      longDescription: 'RENUKA PATIL is an active member of our organization, contributing her time and energy as a student to support various community initiatives and programs.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:nareshpatil481@gmail.com'
+      }
+    },
+    { 
+      name: 'YOGESH PATEL', 
+      role: 'Member', 
+      avatar: 'YP', 
+      image: 'https://res.cloudinary.com/dkkmvurjd/image/upload/v1755245263/WhatsApp_Image_2025-07-26_at_18.15.00_d3a38c8e_jgnkgk.jpg',
+      description: 'Dedicated student member passionate about social service',
+      longDescription: 'YOGESH PATEL serves as a member of our organization, bringing his passion for social service and commitment as a student to support our community development efforts.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:yogeshpatelamjiri@gmail.com'
+      }
+    },
+    { 
+      name: 'NIRMAL KOTHE', 
+      role: 'Witness', 
+      avatar: 'NK', 
+      image: 'https://placehold.co/500x500.png',
+      description: 'Student serving as witness and legal advisor for the organization',
+      longDescription: 'NIRMAL KOTHE serves as our witness and provides valuable legal guidance to ensure our organization operates within proper frameworks and maintains ethical standards.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:nirmalkothe9991@gmail.com'
       }
     },
 ];
 
-const otherTeamMembers = [
-  { 
-    name: 'Sameer Khan', 
-    role: 'Logistics Manager', 
-    avatar: 'SK',
-    image: 'https://placehold.co/500x500.png',
-    longDescription: 'Sameer Khan ensures that all our projects have the resources they need, when they need them. He is a master of supply chain management and procurement, making sure our operations run smoothly and efficiently.',
-    socials: { linkedin: '#', twitter: '#', email: 'mailto:sameer.khan@example.com' }
-  },
-  { 
-    name: 'Neha Desai', 
-    role: 'Finance Officer', 
-    avatar: 'ND',
-    image: 'https://placehold.co/500x500.png',
-    longDescription: 'Neha Desai manages our finances with utmost transparency and integrity. She is responsible for budgeting, financial reporting, and ensuring every donation is used effectively to maximize its impact.',
-    socials: { linkedin: '#', twitter: '#', email: 'mailto:neha.desai@example.com' }
-  },
-  { 
-    name: 'Arjun Reddy', 
-    role: 'IT Specialist', 
-    avatar: 'AR',
-    image: 'https://placehold.co/500x500.png',
-    longDescription: 'Arjun Reddy is the technical backbone of our organization. He manages our digital infrastructure, from the website to our internal communication systems, ensuring we stay connected and secure.',
-    socials: { linkedin: '#', twitter: '#', email: 'mailto:arjun.reddy@example.com' }
-  },
-  { 
-    name: 'Kavita Iyer', 
-    role: 'Legal Advisor', 
-    avatar: 'KI',
-    image: 'https://placehold.co/500x500.png',
-    longDescription: 'Kavita Iyer provides pro bono legal counsel to our organization. Her expertise in non-profit law helps us navigate complex regulations and maintain our commitment to ethical practices.',
-    socials: { linkedin: '#', twitter: '#', email: 'mailto:kavita.iyer@example.com' }
-  },
-  { 
-    name: 'Rajesh Kumar', 
-    role: 'Field Officer', 
-    avatar: 'RK',
-    image: 'https://placehold.co/500x500.png',
-    longDescription: 'Rajesh Kumar works on the front lines, implementing our projects directly within the communities we serve. His dedication and hands-on approach are vital to our success.',
-    socials: { linkedin: '#', twitter: '#', email: 'mailto:rajesh.kumar@example.com' }
-  },
-  { 
-    name: 'Sunita Patil', 
-    role: 'Admin Assistant', 
-    avatar: 'SP',
-    image: 'https://placehold.co/500x500.png',
-    longDescription: 'Sunita Patil keeps our office running like a well-oiled machine. She handles administrative tasks with a smile, providing crucial support to the entire team.',
-    socials: { linkedin: '#', twitter: '#', email: 'mailto:sunita.patil@example.com' }
-  },
-  { 
-    name: 'Mahesh Babu', 
-    role: 'Driver', 
-    avatar: 'MB',
-    image: 'https://placehold.co/500x500.png',
-    longDescription: 'Mahesh Babu is our trusted driver, ensuring our team and supplies get to where they need to go, safely and on time. He is an essential part of our logistical operations.',
-    socials: { linkedin: '#', twitter: '#', email: 'mailto:mahesh.babu@example.com' }
-  },
+const otherTeamMembers =  [
+    { 
+      name: 'BABITA KOTHE', 
+      role: 'President', 
+      avatar: 'BK', 
+      image: 'https://res.cloudinary.com/dkkmvurjd/image/upload/v1755245262/WhatsApp_Image_2025-07-26_at_18.17.56_7bc284df_kkito0.jpg',
+      description: 'Student and dedicated leader with vision for community empowerment',
+      longDescription: 'BABITA KOTHE serves as the President of our organization, bringing fresh perspectives and student leadership to drive our mission forward. As a dedicated student, she combines academic excellence with practical leadership skills to guide our team effectively.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:kothebabita@gmail.com'
+      }
+    },
+    { 
+      name: 'ROSHAN PATIL', 
+      role: 'Vice President', 
+      avatar: 'RP', 
+      image: 'https://placehold.co/500x500.png',
+      description: 'Businessman with strategic vision and community development expertise',
+      longDescription: 'ROSHAN PATIL brings valuable business acumen to our organization as Vice President. His experience as a businessman helps us maintain sustainable operations while expanding our community impact through strategic partnerships and resource management.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:roshpatilo@gmail.com'
+      }
+    },
+    { 
+      name: 'SALOMI REDDY', 
+      role: 'Secretary', 
+      avatar: 'SR', 
+      image: 'https://placehold.co/500x500.png',
+      description: 'Working professional with excellent organizational and communication skills',
+      longDescription: 'SALOMI REDDY serves as our Secretary, leveraging her professional experience to maintain efficient operations and clear communication channels. Her background as a working professional brings valuable organizational expertise to our team.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:Salomir30005@gmail.com'
+      }
+    },
+    { 
+      name: 'ANKIT KOTHE', 
+      role: 'Treasurer', 
+      avatar: 'AK', 
+      image: 'https://placehold.co/500x500.png',
+      description: 'Student with strong financial management and accountability skills',
+      longDescription: 'ANKIT KOTHE manages our financial operations as Treasurer. Despite being a student, he demonstrates exceptional responsibility in managing funds and maintaining transparent financial records for our organization.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:ankiitkothe@gmail.com'
+      }
+    },
+    { 
+      name: 'SHREHARSH DUBEY', 
+      role: 'Joint Secretary', 
+      avatar: 'SD', 
+      image: 'https://placehold.co/500x500.png',
+      description: 'Student leader with collaborative approach and administrative skills',
+      longDescription: 'SHREHARSH DUBEY serves as Joint Secretary, supporting the Secretary in maintaining smooth operations. His student perspective brings fresh ideas while his leadership skills help coordinate team activities effectively.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:shreash7319@gmail.com'
+      }
+    },
+    { 
+      name: 'RENUKA PATIL', 
+      role: 'Member', 
+      avatar: 'RP', 
+      image: 'https://placehold.co/500x500.png',
+      description: 'Active student member contributing to community initiatives',
+      longDescription: 'RENUKA PATIL is an active member of our organization, contributing her time and energy as a student to support various community initiatives and programs.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:nareshpatil481@gmail.com'
+      }
+    },
+    { 
+      name: 'YOGESH PATEL', 
+      role: 'Member', 
+      avatar: 'YP', 
+      image: 'https://res.cloudinary.com/dkkmvurjd/image/upload/v1755245263/WhatsApp_Image_2025-07-26_at_18.15.00_d3a38c8e_jgnkgk.jpg',
+      description: 'Dedicated student member passionate about social service',
+      longDescription: 'YOGESH PATEL serves as a member of our organization, bringing his passion for social service and commitment as a student to support our community development efforts.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:yogeshpatelamjiri@gmail.com'
+      }
+    },
+    { 
+      name: 'NIRMAL KOTHE', 
+      role: 'Witness', 
+      avatar: 'NK', 
+      image: 'https://placehold.co/500x500.png',
+      description: 'Student serving as witness and legal advisor for the organization',
+      longDescription: 'NIRMAL KOTHE serves as our witness and provides valuable legal guidance to ensure our organization operates within proper frameworks and maintains ethical standards.',
+      socials: {
+        linkedin: '#',
+        twitter: '#',
+        email: 'mailto:nirmalkothe9991@gmail.com'
+      }
+    },
 ];
 
 
@@ -223,7 +310,7 @@ export default function AboutPage(): JSX.Element {
                   <DialogTrigger asChild>
                     <Card className="text-center p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 flex flex-col cursor-pointer">
                         <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary/20">
-                        <AvatarImage src={member.image} alt={member.name} data-ai-hint="portrait person" />
+                        <AvatarImage src={member.image} alt={member.name} />
                         <AvatarFallback className="text-2xl bg-primary/30 text-primary font-bold">{member.avatar}</AvatarFallback>
                         </Avatar>
                         <div className="flex-grow">
@@ -290,10 +377,10 @@ export default function AboutPage(): JSX.Element {
                             <div className="p-1">
                                 <Dialog>
                                     <DialogTrigger asChild>
-                                        <Card className="pt-6 cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                        <Card className="pt-6 cursor-pointer">
                                             <CardContent className="flex flex-col items-center justify-center space-y-2">
                                                 <Avatar className="w-20 h-20">
-                                                    <AvatarImage src={member.image} alt={member.name} data-ai-hint="portrait person" />
+                                                    <AvatarImage src={member.image} alt={member.name} />
                                                     <AvatarFallback className="text-xl bg-secondary text-secondary-foreground font-bold">{member.avatar}</AvatarFallback>
                                                 </Avatar>
                                                 <div className="text-center">
@@ -370,9 +457,3 @@ export default function AboutPage(): JSX.Element {
     </div>
   );
 }
-
-    
-
-    
-
-    
